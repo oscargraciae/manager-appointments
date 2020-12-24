@@ -1,17 +1,18 @@
 // Libraries
 import React, { useEffect, useState } from 'react'
-import { Box } from '@chakra-ui/react';
+import { Box, Flex, Spacer, Spinner, Text } from '@chakra-ui/react';
 import { UserService } from '../../services/userService';
 import { User } from '../../types/User';
+import { Header } from './Header';
+import { Sidebar } from './Sidebar';
 
 interface LayoutProps {}
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchMe = async () => {
-    setIsLoading(true);
     const { success, user } = await new UserService().getMe();
     if (!success || !user) {
       alert('Usuario no encotrado');
@@ -24,16 +25,38 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log('creando el componenten por primera vez');
     fetchMe();
   }, []);
 
+  if(isLoading) {
+    return (
+      <Flex direction='column' justify='center' align='center' flex={1} w='100%' height='100vh'>
+        <Spinner size='xl' color='primary' />
+        <Text mt={4} fontWeight='bold' fontSize='2xl'>Cargando Boombook</Text>
+      </Flex>
+    )
+  }
+
+  // if (!user) {
+  //   <Flex direction='column' justify='center' align='center' flex={1} w='100%' height='100vh'>
+  //     <Text mt={4} fontWeight='bold' fontSize='2xl'>Usuario no disponible</Text>
+  //   </Flex>
+  // }
+
   return (
-    <Box>
-      { (isLoading || !user) ? <h1>Cargando pagina</h1> :  <Box>
-        <h1>Hola {user.email}</h1>
-        {children}
-      </Box> }
+    <Box height='100vh' bg='background'>
+      
+  
+      <Flex direction='row'>
+        <Sidebar />
+        <Box w='100%'>
+          <Header user={user} />
+          <Box>
+            {children}
+          </Box>
+        </Box>
+      </Flex>
+      
     </Box>
   );
 }

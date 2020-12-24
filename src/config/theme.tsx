@@ -24,7 +24,8 @@ const theme = extendTheme({
     _secondary: '#161e2c', // Secondanry variant
     error: '#B00020',
     background: '#F6F7F9',
-    surface: '#FFFFFF'
+    surface: '#FFFFFF',
+    borders: '#d9e3eb',
   },
   fonts,
   // breakpoints,

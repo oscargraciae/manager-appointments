@@ -28,7 +28,8 @@ export const Login: React.FC<LoginProps> = ({}) => {
     if (!response.success && response.message) {
       setError(response.message);
     } else {
-      history.push('/');
+      console.log('cambio de pagina login');
+      history.push('/test');
     }
   };
 
@@ -57,7 +58,7 @@ export const Login: React.FC<LoginProps> = ({}) => {
 
                   <Divider orientation='horizontal' my={4} />
                   <Text mb={2}>¿No tienes cuenta?{" "}
-                    <Link fontWeight='bold' color='primary'>Registrate</Link>
+                    <Link fontWeight='bold' color='primary' onClick={() => history.push('/test')}>Registrate</Link>
                   </Text>
                 </VStack>
               </Form>
