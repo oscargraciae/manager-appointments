@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Button, Heading, Text, VStack, Link, Divider } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
+import { Link as Lnk } from 'react-router-dom';
 
 import { Wrapper } from '../components/general/Wrapper';
 import { InputField, PasswordInputField } from '../components/general/InputField';
@@ -50,7 +51,9 @@ export const Signup: React.FC<SignupProps> = ({}) => {
 
                   <Divider orientation='horizontal' my={4} />
                   <Text mb={2}>¿Ya tienes tu cuenta?{" "}
-                    <Button variant='link' color='brand.400' fontWeight='bold'>Iniciar sesion</Button>
+                    <Lnk to='/login'>
+                      <Link color='primary' fontWeight='bold'>Iniciar sesion</Link>
+                    </Lnk>
                   </Text>
                 </VStack>
               </Form>

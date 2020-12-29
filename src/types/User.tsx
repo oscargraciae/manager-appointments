@@ -1,8 +1,11 @@
+import { BusinessUser } from "./BusinessUser";
+
 export interface User {
   email: string
   password: string
   firstName: string
   lastName: string
+  businessUser?: BusinessUser
 }
 
 export interface UserResponse {

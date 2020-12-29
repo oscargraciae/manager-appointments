@@ -1,12 +1,12 @@
-import { Box, Text } from '@chakra-ui/react';
 import React from 'react'
+import { Box, Heading, Text } from '@chakra-ui/react';
 
 interface NotFoundProps {}
 
 export const NotFound: React.FC<NotFoundProps> = ({}) => {
   return (
     <Box>
-      <Text>Not found</Text>
+      <Heading>NOT FONUDS</Heading>
     </Box>
   );
 }

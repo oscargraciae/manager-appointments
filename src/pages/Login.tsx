@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Box, Button, Heading, Text, VStack, Link, Divider } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import { useHistory } from 'react-router-dom';
+import { Link as Lnk, useHistory } from 'react-router-dom';
 
 // Local libraries
 import { loginValidation } from '../validations/loginValidation';
@@ -14,9 +14,7 @@ import { Wrapper } from '../components/general/Wrapper';
 import { InputField, PasswordInputField } from '../components/general/InputField';
 import { AlertError } from '../components/general/AlertError';
 
-interface LoginProps {}
-
-export const Login: React.FC<LoginProps> = ({}) => {
+export const Login: React.FC = () => {
   const [error, setError] = useState('');
 
   const history = useHistory();
@@ -58,7 +56,9 @@ export const Login: React.FC<LoginProps> = ({}) => {
 
                   <Divider orientation='horizontal' my={4} />
                   <Text mb={2}>¿No tienes cuenta?{" "}
-                    <Link fontWeight='bold' color='primary' onClick={() => history.push('/test')}>Registrate</Link>
+                    <Lnk to='/signup'>
+                      <Link color='primary' fontWeight='bold'>Registrate</Link>
+                    </Lnk>
                   </Text>
                 </VStack>
               </Form>

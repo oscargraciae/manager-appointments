@@ -1,16 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Libraries
 import React, { useEffect, useState } from 'react'
-import { Box, Flex, Spacer, Spinner, Text } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
+
 import { UserService } from '../../services/userService';
 import { User } from '../../types/User';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
+import { Loading } from './Loading';
 
 interface LayoutProps {}
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   const fetchMe = async () => {
     const { success, user } = await new UserService().getMe();
@@ -20,8 +25,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       // Aqui se debe de enviar al login, cerrar sesion o mostrar alguna pantalla de error
     };
 
+    if (!user.businessUser) {
+      // alert('Este usuario no tiene tienda, favor de registrar una.')
+      history.push('/new-business');
+    }
+
     setUser(user);
     setIsLoading(false);
+  }
+
+  const logout = async () => {
+    await new UserService().logout();
+    history.push('/login');
   }
 
   useEffect(() => {
@@ -29,12 +44,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, []);
 
   if(isLoading) {
-    return (
-      <Flex direction='column' justify='center' align='center' flex={1} w='100%' height='100vh'>
-        <Spinner size='xl' color='primary' />
-        <Text mt={4} fontWeight='bold' fontSize='2xl'>Cargando Boombook</Text>
-      </Flex>
-    )
+    return <Loading />
   }
 
   // if (!user) {
@@ -48,7 +58,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       
   
       <Flex direction='row'>
-        <Sidebar />
+        <Sidebar logout={logout} />
         <Box w='100%'>
           <Header user={user} />
           <Box>

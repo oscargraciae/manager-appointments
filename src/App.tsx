@@ -10,8 +10,8 @@ import { Login } from './pages/Login';
 import { Home } from './pages/Home';
 import { Signup } from './pages/Signup';
 import { Settings } from './pages/Settings';
-import { NotFound } from './pages/NotFound';
 import { BookingCalendar } from './pages/BookingCalendar';
+import { NewBusiness } from './pages/NewBusiness';
 
 const App = () => {
 
@@ -19,19 +19,36 @@ const App = () => {
     const isAuth = Cookies.get("qid") ? true : false
     if (isAuth) {
       return (
-        <Layout>
-          <Route path='/' exact component={Home} />
-          <Route path='/calendar' exact component={BookingCalendar} />
-          <Route path='/settings' exact component={Settings} />
-        </Layout>
+        <Route exact path='/:path?'>
+          <Layout>
+            <Route path='/' exact component={Home} />
+            <Route path='/calendar' exact component={BookingCalendar} />
+            <Route path='/settings' exact component={Settings} />
+            {/* <Route component={NotFound}/> */}
+          </Layout>
+        </Route>
       )
     } else {
       return <Route render={() => <Redirect to={{ pathname: '/login' }} />} />
     }
   }
 
+  const PrivateRoute = ({ component: Component, ...rest }: any) => {
+    const isAuth = Cookies.get("qid") ? true : false
+    return (
+      <Route
+        {...rest}
+        render={(props) => ( isAuth
+          ? ( <Component {...props} /> ) 
+          : ( <Redirect to={{ pathname: '/login' }} /> )) 
+        } 
+      />
+    )
+  }
+
   const PublicRoute = ({ component: Component, ...rest }: any) => {
     const isAuth = Cookies.get("qid") ? true : false
+    console.log('isAuth', isAuth);
     return (
       <Route
         {...rest}
@@ -45,13 +62,15 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      
       <Switch>
         <PublicRoute path='/login' exact component={Login} />
         <PublicRoute path='/signup' exact component={Signup} />
+        
+        <PrivateRoute path='/new-business/:step?' exact component={NewBusiness} />
+        {/* <Route component={NotFound}/> */}
 
         <PrivateRoutes />
-        
-        <Route component={NotFound}/>
       </Switch>
     </BrowserRouter>   
   )

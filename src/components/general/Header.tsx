@@ -1,5 +1,6 @@
 import { Flex, Spacer, Text } from '@chakra-ui/react';
 import React from 'react'
+import { APP_NAME } from '../../config/constants';
 import { User } from '../../types/User';
 
 interface HeaderProps {
@@ -11,7 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
   if (!user) {
     return (
       <Flex bg='surface' align='center' justify='center' shadow='md' borderBottomColor='#DDD' borderWidth={1} p={4}>
-        <Text>Boombook</Text>
+        <Text>{APP_NAME}</Text>
         <Spacer />
         <Text>Iniciar sesion</Text>
       </Flex>

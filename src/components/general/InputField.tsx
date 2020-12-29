@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useState } from "react";
+import React, { useState, InputHTMLAttributes } from "react";
 import { useField } from "formik";
 import {
   FormControl,
@@ -8,25 +8,33 @@ import {
   FormErrorMessage,
   InputGroup,
   InputRightElement,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
-type InputFieldProps = InputProps & InputHTMLAttributes<HTMLInputElement> & {
+// type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+//   label: string;
+//   name: string;
+//   errors?: string
+// };
+
+type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & InputProps & {
   label: string;
   name: string;
   errors?: string
+  inputSize?: string
 };
+
 
 // '' => false
 // 'error message stuff' => true
 
-export const InputField: React.FC<InputFieldProps> = ({ label, errors, ...props }) => {
-  const [field, { error, touched }] = useField(props);
+export const InputField: React.FC<InputFieldProps> = ({ label, errors, inputSize = 'md', ...props }) => {
+  const [field, { error }] = useField(props);
   return (
     <FormControl isInvalid={!!error}>
       <FormLabel fontWeight='bold' fontSize='sm' htmlFor={field.name}>{label}</FormLabel>
-      <Input {...field} {...props} id={field.name} />
+      <Input size={inputSize} {...field} {...props} id={field.name} />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>
   );
