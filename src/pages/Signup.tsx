@@ -1,26 +1,32 @@
 import React, { useState } from 'react'
 import { Box, Button, Heading, Text, VStack, Link, Divider } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import { Link as Lnk } from 'react-router-dom';
+import { Link as Lnk, useHistory } from 'react-router-dom';
 
 import { Wrapper } from '../components/general/Wrapper';
 import { InputField, PasswordInputField } from '../components/general/InputField';
 import { UserService } from '../services/userService';
 import { User } from '../types/User';
 import { AlertError } from '../components/general/AlertError';
+import { signupValidation } from '../validations/signupValidation';
 
 interface SignupProps {}
 
 export const Signup: React.FC<SignupProps> = ({}) => {
+  const history = useHistory();
   const [error, setError] = useState('');
 
   const onSubmit = async (values: User) => {
     const userService = new UserService();
-    const response = await userService.login(values);
+    const response = await userService.signup(values);
 
     if (!response.success && response.message) {
       setError(response.message);
+      return;
     }
+
+    history.push('/');
+
   };
 
   const initialState = {
@@ -35,7 +41,7 @@ export const Signup: React.FC<SignupProps> = ({}) => {
         <Heading as='h1'>Bienvenido</Heading>
         <Text mt={2} fontWeight='bold'>Registrate y obten 3 meses gratis.</Text>
         <Box mt={4}>
-          <Formik initialValues={initialState} onSubmit={onSubmit}>
+          <Formik initialValues={initialState} onSubmit={onSubmit} validate={signupValidation}>
             {({ isSubmitting }) => (
               <Form>
                 <VStack spacing={4}>
@@ -51,9 +57,9 @@ export const Signup: React.FC<SignupProps> = ({}) => {
 
                   <Divider orientation='horizontal' my={4} />
                   <Text mb={2}>¿Ya tienes tu cuenta?{" "}
-                    <Lnk to='/login'>
-                      <Link color='primary' fontWeight='bold'>Iniciar sesion</Link>
-                    </Lnk>
+                    <Link as={Lnk} to='/login' color='primary' fontWeight='bold'>
+                      Iniciar sesion
+                    </Link>
                   </Text>
                 </VStack>
               </Form>

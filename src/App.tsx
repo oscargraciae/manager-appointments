@@ -12,6 +12,8 @@ import { Signup } from './pages/Signup';
 import { Settings } from './pages/Settings';
 import { BookingCalendar } from './pages/BookingCalendar';
 import { NewBusiness } from './pages/NewBusiness';
+import { SettingsAddress } from './pages/SettingsAddress';
+import { SettingsLocation } from './pages/SettingsLocation';
 
 const App = () => {
 
@@ -19,11 +21,14 @@ const App = () => {
     const isAuth = Cookies.get("qid") ? true : false
     if (isAuth) {
       return (
-        <Route exact path='/:path?'>
+        <Route exact path='/:path?/:path2?'>
           <Layout>
             <Route path='/' exact component={Home} />
             <Route path='/calendar' exact component={BookingCalendar} />
             <Route path='/settings' exact component={Settings} />
+            <Route path='/settings/address' exact component={SettingsAddress} />
+            <Route path='/settings/services' exact component={Settings} />
+            <Route path='/settings/location' exact component={SettingsLocation} />
             {/* <Route component={NotFound}/> */}
           </Layout>
         </Route>

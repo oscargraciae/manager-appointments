@@ -9,7 +9,8 @@ export class UserService extends HttpClient {
   }
 
   public login = (data: User) => this.instance.post<UserResponse>('/users/auth', data);
-  public logout = () => this.instance.get<UserResponse>('/users/auth/logout');
+  public signup = (data: User) => this.instance.post<UserResponse>('/users', data);
 
+  public logout = () => this.instance.get<UserResponse>('/users/auth/logout');
   public getMe = () => this.instance.get<UserResponse>('/users');
 }

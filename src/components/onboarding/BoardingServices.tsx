@@ -2,25 +2,36 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, Flex, FormControl, FormLabel, Heading, HStack, NumberInput, NumberInputField, Select, Text, VStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
-import { User } from '../../types/User';
 import { Form, Formik } from 'formik';
 import { InputField } from '../general/InputField';
 import { BusinessService } from '../../services/businessService';
 import { IBusinessItemService } from '../../types/BusinessService';
+import { IBusiness } from '../../types/Business';
 
-interface BoardingServicesProps {
-  user: User
-  businessId: number
-}
+interface BoardingServicesProps {}
 
-export const BoardingServices: React.FC<BoardingServicesProps> = ({ businessId }) => {
-  const [services, setServices] =  useState<IBusinessItemService[]>([]);
+export const BoardingServices: React.FC<BoardingServicesProps> = ({}) => {
+  const [business, setBusiness] = useState<Required<IBusiness> | null>(null);
+
   const history = useHistory()
 
-  const onSubmit = async (values: IBusinessItemService) => {
-    const { success } = await new BusinessService().createService(values, businessId)
+  const getBusiness = async () => {
+    const { success, business }  = await new BusinessService().get();
     if (success) {
-      history.push('/new-business/4');
+      setBusiness(business);
+    }
+  }
+
+  useEffect(() => {
+    getBusiness();
+  }, []);
+
+  const onSubmit = async (values: IBusinessItemService) => {
+    if (business) {
+      const { success } = await new BusinessService().createService(values, business.id)
+      if (success) {
+        history.push('/new-business/4');
+      }
     }
   }
 
@@ -67,7 +78,7 @@ export const BoardingServices: React.FC<BoardingServicesProps> = ({ businessId }
                     </Select>
                   </FormControl>
                 </HStack>
-                <Button variant='primary' type='submit' isLoading={isSubmitting}>Siguiente</Button>
+                <Button size='lg' alignSelf='flex-end' variant='primary' type='submit' isLoading={isSubmitting}>Siguiente</Button>
               </VStack>
             </Flex>
           </Form>

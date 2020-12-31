@@ -2,6 +2,7 @@ import { Box, Heading, Progress } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { Loading } from '../components/general/Loading';
+import { BoardingHours } from '../components/onboarding/BoardingHours';
 import { BoardingInformation } from '../components/onboarding/BoardingInformation';
 import { BoardingServices } from '../components/onboarding/BoardingServices';
 import { BoardingSuccess } from '../components/onboarding/BoardingSuccess';
@@ -61,7 +62,7 @@ export const NewBusiness: React.FC = () => {
     setStep(step)
   }
 
-  if (!user || isLoading || !business) {
+  if (!user || isLoading) {
     return <Loading />
   }
 
@@ -72,8 +73,10 @@ export const NewBusiness: React.FC = () => {
       case 2:
         return <BoardingInformation setStep={handleSteps} />
       case 3:
-        return <BoardingServices businessId={business.id} user={user} />
+        return <BoardingServices />
       case 4:
+        return <BoardingHours />
+      case 5:
         return <BoardingSuccess />
       default:
         return <Heading>No se pudo cargar la pagina</Heading>
@@ -84,7 +87,7 @@ export const NewBusiness: React.FC = () => {
     <Box bg='#FFFFFF' height='100vh'>
       <Box mx='auto' w='800px' py={10}>
         <Box>
-          <Progress value={25 * step} colorScheme='green' />
+          <Progress value={20 * step} colorScheme='green' />
         </Box>
         <Box mt={10}>
           { (user && !isLoading) && buildOnboarding() }

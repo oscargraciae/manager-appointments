@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
 import {
   CgCalendar,
   CgHome,
@@ -7,30 +7,31 @@ import {
   CgToolbox
 } from 'react-icons/cg';
 import { Link as Lnk } from 'react-router-dom';
-import { APP_NAME } from '../../config/constants';
+
+import ReserlyLogo from './../../assets/Reserly.png';
+import { IBusiness } from '../../types/Business';
 
 interface SidebarProps {
   logout: any
+  business: IBusiness
 }
 
 const MenuLink: React.FC<{ title: string, icon: any, href: string }> = ({title, icon, href}) => (
   <Flex direction='row'>  
-    <Link w='100%' _hover={{ bg: 'primary', color: '#FFFFFF' }} fontWeight='bold'>
-      <Lnk to={href} style={{ background: 'red' }}>
-        <Flex direction='row' align='center' p={3} >
-          {icon()} <Text fontSize='sm' ml={3}>{title}</Text>
-        </Flex>
-      </Lnk>
+    <Link as={Lnk} to={href} w='100%' _hover={{ bg: 'primary', color: '#FFFFFF' }} fontWeight='bold'>
+      <Flex direction='row' align='center' p={3} >
+        {icon()} <Text fontSize='sm' ml={5}>{title}</Text>
+      </Flex>
     </Link>
   </Flex>
 )
 
 export const Sidebar: React.FC<SidebarProps> = ({ logout }) => {
   return (
-    <Box w='270px' h='100vh' bg='surface' shadow='sm' borderRightWidth={1} borderRightColor='borders'>
-      <Box padding={5} textAlign='center' borderBottomWidth={1} borderBottomColor='borders'>
-        <Text fontWeight='bold'>{APP_NAME}</Text>
-      </Box>
+    <Box w='270px' h='100vh' bg='surface' shadow='sm' borderRightWidth={1} borderRightColor='borders' pos='sticky' top='0' left='0'>
+      <Flex py={3} textAlign='center' justify='center' align='center'>
+        <Image src={ReserlyLogo} alt='Reserly' h='64px' />
+      </Flex>
 
       <Box mt={3}>
         <MenuLink title='Inicio' icon={CgHome} href='/' />

@@ -15,4 +15,6 @@ export class BusinessService extends HttpClient {
   createService = (data: IBusinessItemService, businessId: number) => this.instance.post(`/businesses/${businessId}/services`, data);
   getServices = (businessId:number) => this.instance.get(`/businesses/${businessId}/services`);
 
+  createHours = (data: any, businessId: number) => this.instance.post(`/businesses/${businessId}/hours`, data);
+
 }

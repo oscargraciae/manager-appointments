@@ -6,6 +6,7 @@ export interface IBusiness {
   phone?: string
   isActive?: boolean
   isCompleted?: boolean
+  businessCategoryId?: number
 }
 
 // export interface IBusinessGet {

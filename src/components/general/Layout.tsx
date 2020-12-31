@@ -9,13 +9,18 @@ import { User } from '../../types/User';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Loading } from './Loading';
+import { IBusiness } from '../../types/Business';
 
 interface LayoutProps {}
 
+export const UserContext = React.createContext<any>(null);
+
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [business, setBusiness] = useState<IBusiness | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
+
 
   const fetchMe = async () => {
     const { success, user } = await new UserService().getMe();
@@ -28,6 +33,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     if (!user.businessUser) {
       // alert('Este usuario no tiene tienda, favor de registrar una.')
       history.push('/new-business');
+      return;
+    }
+
+    if (user.businessUser.business) {
+      setBusiness(user.businessUser.business)
     }
 
     setUser(user);
@@ -43,7 +53,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     fetchMe();
   }, []);
 
-  if(isLoading) {
+  if(isLoading || !business) {
     return <Loading />
   }
 
@@ -54,19 +64,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   // }
 
   return (
-    <Box height='100vh' bg='background'>
-      
-  
-      <Flex direction='row'>
-        <Sidebar logout={logout} />
-        <Box w='100%'>
-          <Header user={user} />
-          <Box>
-            {children}
+    <UserContext.Provider value={business}>
+      <Box height='100vh' bg='background'>
+        <Flex direction='row'>
+          <Sidebar logout={logout} business={business} />
+          <Box w='100%'>
+            <Header user={user} business={business} />
+            <Box>
+              {children}
+            </Box>
           </Box>
-        </Box>
-      </Flex>
-      
-    </Box>
+        </Flex>
+      </Box>
+    </UserContext.Provider>
   );
 }

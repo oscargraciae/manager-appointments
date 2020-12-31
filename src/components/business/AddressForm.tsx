@@ -33,10 +33,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
       setGeoAddress(address.addressMap);
       setLatLng({ lat: address.lat, lng: address.lng });
 
-      console.log('Tiene mapa', map);
       if (map) {
-        console.log('Tiene mapa');
-        
         map.jumpTo({ center: [address.lng, address.lat], zoom: 16 });
         const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([address.lng, address.lat]).addTo(map);
         marker.on('dragend', () => onDragEnd(marker));
@@ -60,24 +57,6 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
     });
 
   }, [])
-
-  // useEffect(() => {
-  //   const fetchAddress = async () => {
-  //     const { success, address } = await new BusinessAddressService().get(business.id);
-  //     if (success && address) {
-  //       setAddresss(address);
-  //       setGeoAddress(address.addressMap);
-  //       setLatLng({ lat: address.lat, lng: address.lng });
-
-  //       if (map) {
-  //         map.jumpTo({ center: [address.lng, address.lat], zoom: 16 });
-  //         const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([address.lng, address.lat]).addTo(map);
-  //         marker.on('dragend', () => onDragEnd(marker));
-  //       }
-  //     }
-  //   }
-  //   fetchAddress();
-  // }, []);
 
   const onSubmit = async () => {
     let response : BusinessAddressResponse;
@@ -154,12 +133,6 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
                       </Box>
                   )) }
                 </PlacesAutocomplete>
-
-
-                {/* <InputField inputSize='lg' name='street' label='Calle' />
-                <InputField inputSize='lg' name='area' label='Colonia' />
-                <InputField inputSize='lg' name='city' label='Ciudad' />
-                <InputField inputSize='lg' name='state' label='Estado' /> */}
               </VStack>
             </Flex>
             <Box>

@@ -26,8 +26,7 @@ export const Login: React.FC = () => {
     if (!response.success && response.message) {
       setError(response.message);
     } else {
-      console.log('cambio de pagina login');
-      history.push('/test');
+      history.push('/');
     }
   };
 
