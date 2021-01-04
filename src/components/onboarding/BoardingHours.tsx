@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Flex, FormControl, FormLabel, Heading, HStack, IconButton, NumberInput, NumberInputField, Select, Text, Tooltip, VStack } from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, Heading, HStack, IconButton, Select, Text, Tooltip, VStack } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
-import { User } from '../../types/User';
 import { Form, Formik } from 'formik';
-import { InputField } from '../general/InputField';
 import { BusinessService } from '../../services/businessService';
-import { IBusinessItemService } from '../../types/BusinessService';
 import { FaDoorClosed, FaDoorOpen } from 'react-icons/fa';
 import { IBusiness } from '../../types/Business';
 import { Loading } from '../general/Loading';
 
 interface BoardingHoursProps {}
 
-export const BoardingHours: React.FC<BoardingHoursProps> = ({}) => {
+export const BoardingHours: React.FC<BoardingHoursProps> = () => {
   const history = useHistory()
   const [business, setBusiness] = useState<Required<IBusiness> | null>(null);
 

@@ -18,15 +18,15 @@ export const WrapperSettings: React.FC<WrapperSettingsProps> = ({ children }) =>
   return (
     <Box>
       <HStack mt={4} borderBottomWidth={1} borderColor='borders' py={3}>
-        <MenuLink title='Servicios' href='/settings' />
+        <MenuLink title='Servicios' href='/settings/services' />
         <MenuLink title='Datos básicos' href='/settings' />
         <MenuLink title='Ubicación' href='/settings/location' />
         <MenuLink title='Dirección' href='/settings/address' />
-        <MenuLink title='Horario' href='/settings' />
-        <MenuLink title='Usuario' href='/settings' />
+        <MenuLink title='Horario' href='/settings/hours' />
+        {/* <MenuLink title='Usuario' href='/settings' /> */}
       </HStack>
 
-      <Box my={8} bg='surface' borderColor='borders' borderWidth={1} p={6} borderRadius={3}>
+      <Box my={4} bg='surface' borderColor='borders' borderWidth={1} p={6} borderRadius={3}>
         {children}
       </Box>
 

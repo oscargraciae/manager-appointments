@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 import { InputField } from '../general/InputField';
 import { BusinessService } from '../../services/businessService';
-import { IBusinessItemService } from '../../types/BusinessService';
+import { IService } from '../../types/IService';
 import { IBusiness } from '../../types/Business';
 
 interface BoardingServicesProps {}
@@ -26,7 +26,7 @@ export const BoardingServices: React.FC<BoardingServicesProps> = ({}) => {
     getBusiness();
   }, []);
 
-  const onSubmit = async (values: IBusinessItemService) => {
+  const onSubmit = async (values: IService) => {
     if (business) {
       const { success } = await new BusinessService().createService(values, business.id)
       if (success) {

@@ -21,6 +21,7 @@ export const signupValidation = (values: User) => {
   if (!values.lastName) {
     errors.lastName = 'Ingresa un apellido'
   }
+  
 
   return errors;
 }

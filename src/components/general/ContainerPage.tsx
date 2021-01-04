@@ -7,8 +7,8 @@ interface ContainerPageProps {
 
 export const ContainerPage: React.FC<ContainerPageProps> = ({ title, children }) => {
   return (
-    <Box p={6}>
-      <Heading as='h1'>{title}</Heading>
+    <Box p={6} maxW='900px'>
+      <Heading as='h3' size='lg'>{title}</Heading>
 
       <Box mt={3}>
         {children}

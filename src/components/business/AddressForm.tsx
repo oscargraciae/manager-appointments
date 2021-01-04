@@ -24,6 +24,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
   const [geoAddress, setGeoAddress] = useState<string>('');
   const [latLng, setLatLng] = useState({ lng: -74.5, lat: 40 });
   const [map, setMap] = useState<mapboxgl.Map | null>(null);
+  const [mrk, setMrk] = useState<mapboxgl.Marker | null>(null);
+
   const mapContainer = useRef<any>(null);
   
   const fetchAddress = async (map: Map) => {
@@ -37,6 +39,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
         map.jumpTo({ center: [address.lng, address.lat], zoom: 16 });
         const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([address.lng, address.lat]).addTo(map);
         marker.on('dragend', () => onDragEnd(marker));
+        setMrk(marker);
       }
     }
   }
@@ -85,8 +88,15 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
       
       // map.jumpTo({ 'center': [latLng.lng, latLng.lat], 'zoom': 14 });
       map.jumpTo({ center: [latLng.lng, latLng.lat], zoom: 16 });
-      const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([latLng.lng, latLng.lat]).addTo(map);
-      marker.on('dragend', () => onDragEnd(marker));
+
+      if (!mrk) {
+        const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([latLng.lng, latLng.lat]).addTo(map);
+        marker.on('dragend', () => onDragEnd(marker));
+        setMrk(marker);
+      } else {
+        mrk.setLngLat([latLng.lng, latLng.lat]);
+      }
+      
     }
   }
 

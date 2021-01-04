@@ -14,6 +14,8 @@ import { BookingCalendar } from './pages/BookingCalendar';
 import { NewBusiness } from './pages/NewBusiness';
 import { SettingsAddress } from './pages/SettingsAddress';
 import { SettingsLocation } from './pages/SettingsLocation';
+import { SettingsServices } from './pages/SettingsServices';
+import { SettingsHour } from './pages/SettingsHour';
 
 const App = () => {
 
@@ -26,9 +28,10 @@ const App = () => {
             <Route path='/' exact component={Home} />
             <Route path='/calendar' exact component={BookingCalendar} />
             <Route path='/settings' exact component={Settings} />
+            <Route path='/settings/services' exact component={SettingsServices} />
             <Route path='/settings/address' exact component={SettingsAddress} />
-            <Route path='/settings/services' exact component={Settings} />
             <Route path='/settings/location' exact component={SettingsLocation} />
+            <Route path='/settings/hours' exact component={SettingsHour} />
             {/* <Route component={NotFound}/> */}
           </Layout>
         </Route>

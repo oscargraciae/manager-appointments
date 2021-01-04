@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ user, business }) => {
   }
   
   return (
-    <Flex h='65px' bg='surface' align='center' justify='center' borderBottomColor='borders' borderBottomWidth={1} py={4} px={8}>
+    <Flex h='50px' bg='surface' align='center' justify='center' borderBottomColor='borders' borderBottomWidth={1} py={4} px={8}>
       <Text fontWeight='bold'>{business.name}</Text>
       <Spacer />
       <Text>Hola, {user.firstName}</Text>
