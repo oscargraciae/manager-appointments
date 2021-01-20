@@ -1,18 +1,19 @@
 import React from 'react'
-import { Box, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
 
 // local components
-import { Layout } from '../components/general/Layout';
+import { ContainerPage } from '../components/general/ContainerPage';
+import { BookingCalendar } from '../components/booking/BookingCalendar';
 
 
 interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = ({}) => {
   return (
-    <Box>
-      <Text>Home</Text>
-      <Link to='/settings' >Ir a configuración</Link>
-    </Box>
+    <ContainerPage>
+      <Box>
+        <BookingCalendar />
+      </Box>
+    </ContainerPage>
   );
 }

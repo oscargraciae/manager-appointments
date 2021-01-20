@@ -4,7 +4,7 @@ import { Box, VStack, Select, Button, FormControl, FormLabel, Heading, FormError
 import { Form, Formik } from 'formik';
 
 import { ContainerPage } from '../components/general/ContainerPage';
-import { InputField } from '../components/general/InputField';
+import { InputField, TextareaField } from '../components/general/InputField';
 import { WrapperSettings } from '../components/general/WrapperSettings';
 import { BusinessService } from '../services/businessService';
 import { IBusiness } from '../types/Business';
@@ -51,6 +51,7 @@ export const Settings: React.FC<SettingsProps> = () => {
 
   const initialValues : IBusiness = {
     name: business.name ? business.name : '',
+    description: business.description ? business.description : '',
     businessCategoryId: business.businessCategoryId ? business.businessCategoryId : 0,
     phone: business.phone ? business.phone : ''
   }
@@ -65,6 +66,7 @@ export const Settings: React.FC<SettingsProps> = () => {
               <Form>
                 <VStack spacing={8} align='flex-start'>
                   <InputField inputSize='lg' name='name' label='Nombre del negocio' />
+                  <TextareaField inputSize='lg' name='description' label='Descripción del negocio (opcional)' />
                   <FormControl isInvalid={!!errors.businessCategoryId}>
                     <FormLabel fontWeight='bold' fontSize='sm'>Categoría</FormLabel>
                     <Select name='businessCategoryId' size='lg' value={values.businessCategoryId} onChange={handleChange}>

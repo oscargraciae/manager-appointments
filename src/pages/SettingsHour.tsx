@@ -136,13 +136,13 @@ export const SettingsHour: React.FC<SettingsHourProps> = () => {
           <Form>
             <Flex w='100%' mt={10}>
               <VStack w='80%' spacing={3}>
-                { formDay(values, handleChange, setFieldValue, 'Lunes', 0) }
-                { formDay(values, handleChange, setFieldValue, 'Martes', 1) }
-                { formDay(values, handleChange, setFieldValue, 'Miercoles', 2) }
-                { formDay(values, handleChange, setFieldValue, 'Jueves', 3) }
-                { formDay(values, handleChange, setFieldValue, 'Viernes', 4) }
-                { formDay(values, handleChange, setFieldValue, 'Sabado', 5) }
-                { formDay(values, handleChange, setFieldValue, 'Domingo', 6) }
+                { formDay(values, handleChange, setFieldValue, 'Domingo', 0) }
+                { formDay(values, handleChange, setFieldValue, 'Lunes', 1) }
+                { formDay(values, handleChange, setFieldValue, 'Martes', 2) }
+                { formDay(values, handleChange, setFieldValue, 'Miercoles', 3) }
+                { formDay(values, handleChange, setFieldValue, 'Jueves', 4) }
+                { formDay(values, handleChange, setFieldValue, 'Viernes', 5) }
+                { formDay(values, handleChange, setFieldValue, 'Sabado', 6) }
                 <Button size='lg' alignSelf='flex-start' variant='primary' type='submit' isLoading={isSubmitting}>Guardar</Button>
               </VStack>
             </Flex>

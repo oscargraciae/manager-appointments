@@ -66,10 +66,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <UserContext.Provider value={business}>
       <Box height='100vh' bg='background'>
+        <Header user={user} business={business} logout={logout} />
         <Flex direction='row'>
           <Sidebar logout={logout} business={business} />
           <Box w='100%'>
-            <Header user={user} business={business} />
             <Box>
               {children}
             </Box>

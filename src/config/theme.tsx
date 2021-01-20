@@ -27,10 +27,22 @@ const theme = extendTheme({
     background: '#F6F7F9',
     surface: '#FFFFFF',
     borders: '#d9e3eb',
+    subtext: '#717171',
   },
   fonts,
   // breakpoints,
   components: {
+    Link: {
+      variants: {
+        "primary": {
+          fontWeight: 'semibold',
+          _hover: {
+            textDecoration: 'none',
+            color: 'primary'
+          },
+        },
+      },
+    },
     Button: {
       variants: {
         "primary": {

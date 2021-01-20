@@ -28,10 +28,10 @@ const MenuLink: React.FC<{ title: string, icon: any, href: string }> = ({title, 
 
 export const Sidebar: React.FC<SidebarProps> = ({ logout }) => {
   return (
-    <Box w='270px' h='100vh' bg='surface' shadow='sm' borderRightWidth={1} borderRightColor='borders' pos='sticky' top='0' left='0'>
-      <Flex py={3} textAlign='center' justify='center' align='center'>
+    <Box w='210px' h='100vh' bg='surface' shadow='sm' borderRightWidth={1} borderRightColor='borders' pos='sticky' top='0' left='0'>
+      {/* <Flex py={3} textAlign='center' justify='center' align='center'>
         <Image src={ReserlyLogo} alt='Reserly' h='64px' />
-      </Flex>
+      </Flex> */}
 
       <Box mt={3}>
         <MenuLink title='Inicio' icon={CgHome} href='/' />
@@ -39,9 +39,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ logout }) => {
         <MenuLink title='Reservaciones' icon={CgCalendar} href='/bookings' />
         {/* <MenuLink title='Clientes' icon={CgUserList} href='/customers' /> */}
         <MenuLink title='Configuración' icon={CgToolbox} href='/settings' />
-        <Link onClick={(logout)}>
-          Salir
-        </Link>
       </Box>
     </Box>
   );
