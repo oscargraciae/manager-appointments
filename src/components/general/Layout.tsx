@@ -10,6 +10,7 @@ import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { Loading } from './Loading';
 import { IBusiness } from '../../types/Business';
+import { SocketProvider } from '../../context/socketContext';
 
 interface LayoutProps {}
 
@@ -63,19 +64,22 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   //   </Flex>
   // }
 
+  
   return (
     <UserContext.Provider value={business}>
-      <Box height='100vh' bg='background'>
-        <Header user={user} business={business} logout={logout} />
-        <Flex direction='row'>
-          <Sidebar logout={logout} business={business} />
-          <Box w='100%'>
-            <Box>
-              {children}
+      <SocketProvider>
+        <Box height='100vh' bg='background'>
+          <Header user={user} business={business} logout={logout} />
+          <Flex direction='row'>
+            <Sidebar logout={logout} business={business} />
+            <Box w='100%'>
+              <Box>
+                {children}
+              </Box>
             </Box>
-          </Box>
-        </Flex>
-      </Box>
+          </Flex>
+        </Box>
+      </SocketProvider>
     </UserContext.Provider>
   );
 }
