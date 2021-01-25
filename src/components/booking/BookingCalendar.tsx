@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useContext, useEffect, useState } from 'react'
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text } from '@chakra-ui/react';
 import { Calendar, Event, EventPropGetter, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 
@@ -17,12 +17,16 @@ import './BookingCalendar.css';
 import { BusinessService } from '../../services/businessService';
 import { UserContext } from '../general/Layout';
 import { getMin, getMax } from '../../utils/hoursFilters';
+import { useHistory } from 'react-router-dom';
 
 const localizer = momentLocalizer(moment)
 
 interface BookingCalendarProps {}
 
 export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
+  // hooks
+  const history = useHistory();
+
   // context
   const businessContext = useContext(UserContext);
   
@@ -30,8 +34,6 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
   const [bookings, setBookings] = useState<Event[]>([]);
   const [rangeTime, setRangeTime] = useState({ min: '00:00', max: '23:30' });
 
-
-  
   useEffect(() => {
     const fetchHours = async () => {
       const response = await new BusinessService().getHours(businessContext.id);
@@ -56,20 +58,23 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const response = await new BookingService().getAll();
-      console.log('respiuesta de bookling', response);
+      const response = await new BookingService().getAll({ statuses: [1, 2] });
       if (response.success) {
         const bookingEvents = formatBookingDate(response.bookings);
-        console.log('Eventos de reserva', bookingEvents);
-        
         setBookings(bookingEvents);
       }
     }
     fetch();
   }, []);
 
+  const onSelectEvent = (event :any) => {
+    console.log('Click en el evento', event);
+    if (event.id) {
+      history.push(`/bookings/${event.id}`);
+    }
+  }
+
   const eventPropGetter = (event: any, _start: any, _end: any, _isSelected: any) : React.HTMLAttributes<HTMLDivElement> => {
-    console.log('Datos del evento', event);
     
     const style : React.CSSProperties = {
       backgroundColor: event.bookingStatusId === 2 ? '#BDEFD1' : '#FEFCBF',
@@ -113,14 +118,18 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
     }
   }
   
-
-  // const events : Event[] = [{
-  //   title: 'Prueba',
-  //   start: moment().toDate(),
-  //   end: moment().add(2,'hour').toDate(),
-  // }];
   return (
     <Box>
+      <Flex pb={2}>
+        <HStack mr={3}>
+          <Box bg='primary' w={4} h={4} />
+          <Text fontSize='sm'>Aceptado</Text>
+        </HStack>
+        <HStack>
+          <Box bg='#ECC94B' w={4} h={4} />
+          <Text fontSize='sm'>Pendiente</Text>
+        </HStack>
+      </Flex>
       <Calendar
         localizer={localizer}
         events={bookings}
@@ -140,6 +149,7 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
         views={{ week: true, day: true, agenda: true }}
         min={moment(rangeTime.min, [moment.ISO_8601, 'HH:mm']).toDate()}
         max={moment(rangeTime.max, [moment.ISO_8601, 'HH:mm']).toDate()}
+        onSelectEvent={onSelectEvent}
       />
     </Box>
   );

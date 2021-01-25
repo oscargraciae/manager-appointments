@@ -28,6 +28,7 @@ const theme = extendTheme({
     surface: '#FFFFFF',
     borders: '#d9e3eb',
     subtext: '#717171',
+    primaryLight: '#E9F9EF'
   },
   fonts,
   // breakpoints,

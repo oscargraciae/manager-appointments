@@ -7,6 +7,7 @@ import { minutesToHour } from '../../utils/minutesToHours';
 import { BookingService } from '../../services/bookingService';
 import { LoadingView } from '../general/LoadingView';
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+import { useHistory } from 'react-router-dom';
 
 interface BookingsListProps {}
 
@@ -17,6 +18,7 @@ interface BookingsListProps {}
 export const BookingsList: React.FC<BookingsListProps> = ({}) => {
   // hooks
   const toast = useToast();
+  const history = useHistory();
 
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -93,10 +95,17 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
         <Tbody>
           { bookings.map((item: IBooking, index :number) => (
             <Tr fontSize='14px'>
-              <Td>{item.customer?.firstName} {item.customer?.lastName}</Td>
+              <Td
+                textDecor='underline'
+                onClick={() => history.push(`/bookings/${item.id}`)}
+                fontWeight='600'
+                _hover={{ bg: 'primaryLight', cursor: 'pointer' }}
+              >
+                {item.customer?.firstName} {item.customer?.lastName}
+              </Td>
               <Td>{item.bookingDate ? formatDate(item.bookingDate) : ''}</Td>
               <Td>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
-              <Td>$0MXN</Td>
+              <Td>${item.totalPrice}MXN</Td>
               <Td>
                 <Flex>
                   <Tooltip label="Aceptar" fontSize="md">

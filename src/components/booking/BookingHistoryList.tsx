@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Box, Text, Flex, IconButton, Tooltip } from "@chakra-ui/react"
+import moment from 'moment';
 
 import { IBooking } from '../../types/IBooking';
 import { formatDate } from '../../utils/formatDate';
@@ -17,7 +18,7 @@ export const BookingsListHistory: React.FC<BookingsListHistoryProps> = ({}) => {
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const params = { status: 3, time: 10 };
+      const params = { startDate: moment(new Date()).toISOString() };
       
       const { bookings } = await new BookingService().getAll(params);
       setBookings(bookings);
@@ -48,7 +49,7 @@ export const BookingsListHistory: React.FC<BookingsListHistoryProps> = ({}) => {
               <Td>{item.customer?.firstName} {item.customer?.lastName}</Td>
               <Td>{item.bookingDate ? formatDate(item.bookingDate) : ''}</Td>
               <Td>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
-              <Td>$0MXN</Td>
+              <Td>${item.totalPrice}MXN</Td>
               <Td>{item.bookingStatusId === 3 ? 'Cancelada' : 'Terminada'}</Td>
             </Tr>
           )) }

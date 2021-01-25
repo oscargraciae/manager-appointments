@@ -30,7 +30,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ user, business }) => {
       <Heading as='h2'>Estamos contentos de que estes aquí {user.firstName}.</Heading>
       <Text fontSize='xl' fontWeight='500'>Estas a un paso de comenzar a organizar tus clientes.</Text>
 
-      <Formik initialValues={{ name: business ? business.name : '', category: 0 }} onSubmit={onSubmit}>
+      <Formik initialValues={{ name: business ? business.name : '', businessCategoryId: business ? business.businessCategoryId : 0 }} onSubmit={onSubmit}>
         { ({ values, isSubmitting, handleChange }) => (
           <Form>
             <Flex aling='center' justify='center' py={10} w='100%' direction='column' justifyContent='center' align='center'>
