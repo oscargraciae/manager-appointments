@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({ user, business, logout }) => {
         </Link>
       </Flex>
       <Text fontWeight='bold'>{business.name}</Text>
+      <Text fontWeight='bold' fontSize='xs' ml={4} color='primary'>Publicado</Text>
       <Spacer />
       <Menu>
         <Link href='/' size="sm" variant="primary" mx={3}>Modo cliente</Link>

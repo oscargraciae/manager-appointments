@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Box, Text, Flex, IconButton, Tooltip, useToast } from "@chakra-ui/react"
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+import { useHistory } from 'react-router-dom';
 
 import { IBooking } from '../../types/IBooking';
 import { formatDate } from '../../utils/formatDate';
 import { minutesToHour } from '../../utils/minutesToHours';
 import { BookingService } from '../../services/bookingService';
 import { LoadingView } from '../general/LoadingView';
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
-import { useHistory } from 'react-router-dom';
 
 interface BookingsListProps {}
 

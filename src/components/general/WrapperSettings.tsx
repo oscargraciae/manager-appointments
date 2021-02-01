@@ -23,6 +23,7 @@ export const WrapperSettings: React.FC<WrapperSettingsProps> = ({ children }) =>
         <MenuLink title='Ubicación' href='/settings/location' />
         <MenuLink title='Dirección' href='/settings/address' />
         <MenuLink title='Horario' href='/settings/hours' />
+        <MenuLink title='Fotos' href='/settings/photos' />
         {/* <MenuLink title='Usuario' href='/settings' /> */}
       </HStack>
 

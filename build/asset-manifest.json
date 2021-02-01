@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/manager/static/css/main.f5210daf.chunk.css",
+    "main.js": "/manager/static/js/main.372aa542.chunk.js",
+    "main.js.map": "/manager/static/js/main.372aa542.chunk.js.map",
+    "runtime-main.js": "/manager/static/js/runtime-main.c7b449cd.js",
+    "runtime-main.js.map": "/manager/static/js/runtime-main.c7b449cd.js.map",
+    "static/css/2.dd6396f8.chunk.css": "/manager/static/css/2.dd6396f8.chunk.css",
+    "static/js/2.9be98111.chunk.js": "/manager/static/js/2.9be98111.chunk.js",
+    "static/js/2.9be98111.chunk.js.map": "/manager/static/js/2.9be98111.chunk.js.map",
+    "static/js/3.08c6057c.chunk.js": "/manager/static/js/3.08c6057c.chunk.js",
+    "static/js/3.08c6057c.chunk.js.map": "/manager/static/js/3.08c6057c.chunk.js.map",
+    "index.html": "/manager/index.html",
+    "static/css/2.dd6396f8.chunk.css.map": "/manager/static/css/2.dd6396f8.chunk.css.map",
+    "static/css/main.f5210daf.chunk.css.map": "/manager/static/css/main.f5210daf.chunk.css.map",
+    "static/js/2.9be98111.chunk.js.LICENSE.txt": "/manager/static/js/2.9be98111.chunk.js.LICENSE.txt",
+    "static/media/logo-reserly-2.fdfaa62e.png": "/manager/static/media/logo-reserly-2.fdfaa62e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c7b449cd.js",
+    "static/css/2.dd6396f8.chunk.css",
+    "static/js/2.9be98111.chunk.js",
+    "static/css/main.f5210daf.chunk.css",
+    "static/js/main.372aa542.chunk.js"
+  ]
+}

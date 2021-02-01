@@ -46,8 +46,8 @@ export const Welcome: React.FC<WelcomeProps> = ({ user, business }) => {
                       <option value='4' >Tatuajes</option>
                       <option value='5' >Maquillaje</option>
                       <option value='6' >Podologia</option>
-                      <option value='7' >Servicios para el hogar</option>
-                      <option value='8' >Servicios para el mascotas</option>
+                      <option value='7' >Hogar</option>
+                      <option value='8' >Mascotas</option>
                     </Select>
                   </FormControl>
                 <Box textAlign='right'>

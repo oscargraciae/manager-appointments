@@ -54,6 +54,16 @@ const theme = extendTheme({
             bg: "_primary",
           },
         },
+        "primary-outline": {
+          bg: "transparent",
+          borderColor: "primary",
+          borderWidth: 1,
+          color: 'primary',
+          _hover: {
+            bg: "_primary",
+            color: '#FFFFFF',
+          },
+        },
         "secondary": {
           bg: "secondary",
           borderColor: "#05AF3C",

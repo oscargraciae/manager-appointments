@@ -13,14 +13,27 @@ export class BusinessService extends HttpClient {
   update = (data: IBusiness, businessId: number) => this.instance.put<IBusinessResponse>(`/businesses/${businessId}`, data);
   get = () => this.instance.get('/businesses');
 
-  // Api de servicios
+  createHours = (data: any, businessId: number) => this.instance.post(`/businesses/${businessId}/hours`, data);
+  getHours = (businessId: number) => this.instance.get<IHoursResponse>(`/businesses/${businessId}/hours`);
+
+  uplaodCover = (data :any) => this.instance.post('/businesses/upload/cover', data, {
+    headers: {
+      'content-type': 'multipart/form-data'
+    }
+  });
+
+  uplaodGallery = (data :any) => this.instance.post('/businesses/upload/photos', data, {
+    headers: {
+      'content-type': 'multipart/form-data'
+    }
+  });
+
+  deletePhoto = (id :number) => this.instance.delete(`/businesses/upload/photos/${id}`);
+  getPhotos = () => this.instance.get('/businesses/upload/photos');
+
+  // API DE SERVICIOS
   createService = (data: IService, businessId: number) => this.instance.post<IServiceResponse>(`/businesses/${businessId}/services`, data);
   updateService = (data: IService, serviceId: number, businessId: number) => this.instance.put<IServiceResponse>(`/businesses/${businessId}/services/${serviceId}`, data);
   deleteService = (serviceId: number, businessId: number) => this.instance.delete<IServiceResponse>(`/businesses/${businessId}/services/${serviceId}`);
   getServices = (businessId:number) => this.instance.get<IServicesResponse>(`/businesses/${businessId}/services`);
-
-  // Api de horas
-  createHours = (data: any, businessId: number) => this.instance.post(`/businesses/${businessId}/hours`, data);
-  getHours = (businessId: number) => this.instance.get<IHoursResponse>(`/businesses/${businessId}/hours`);
-
 }
