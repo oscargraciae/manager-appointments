@@ -78,8 +78,6 @@ export const UploadGallery: React.FC<UploadGalleryProps> = ({}) => {
   }
 
   const handleDeletePhoto = async (id :number, index :number) => {
-    console.log('Delete by id', id);
-    console.log('Delete by index', index);
     setIsLoading(true);
     if (id) {
       const response = await new BusinessService().deletePhoto(id);
