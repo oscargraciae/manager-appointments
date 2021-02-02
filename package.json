@@ -2,7 +2,7 @@
   "name": "manager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/manager/",
+  "homepage": "/",
   "dependencies": {
     "@chakra-ui/react": "^1.0.4",
     "@emotion/react": "^11.1.3",
