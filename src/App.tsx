@@ -21,7 +21,6 @@ import { Booking } from './pages/Booking';
 import { SettingsGallery } from './pages/SettingsGallery';
 
 const App = () => {
-
   const PrivateRoutes = () => {
     const isAuth = Cookies.get("qid") ? true : false
     if (isAuth) {

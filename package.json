@@ -11,6 +11,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "dotenv-flow": "^3.2.0",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.6",
     "framer-motion": "^3.1.1",
     "js-cookie": "^2.2.1",
@@ -30,11 +32,12 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "NODE_ENV=production node -r dotenv/config index.js",
     "dev": "PORT=8002 react-scripts start",
-    "build": "react-scripts build",
+    "build:prod": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build": "env-cmd -f .env.production npm run build:prod"
   },
   "eslintConfig": {
     "extends": [
