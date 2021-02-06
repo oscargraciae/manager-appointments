@@ -115,7 +115,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Box w='100%'>
               <Flex w='100%' bg='surface' px={6} py={2} alignItems='center'>
                 <Text fontSize='sm' fontWeight='bold' mr={2}>Compartir</Text>
-                <Text fontSize='sm' >{`${window.location.origin}/${generateName(business.name)}/${business.id}`}</Text>
+                <Text fontSize='sm' >{`${window.location.origin}/b/${generateName(business.name)}/${business.id}`}</Text>
                 <Button size='xs' ml={3} leftIcon={<ImCopy />} onClick={copyUrl}>
                   Copiar URL
                 </Button>
