@@ -121,14 +121,16 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
   return (
     <Box>
       <Flex pb={2}>
-        <HStack mr={3}>
-          <Box bg='primary' w={4} h={4} />
-          <Text fontSize='sm'>Aceptado</Text>
-        </HStack>
-        <HStack>
-          <Box bg='#ECC94B' w={4} h={4} />
-          <Text fontSize='sm'>Pendiente</Text>
-        </HStack>
+        <Flex mb={1}>
+          <HStack mr={3}>
+            <Box bg='primary' w={4} h={4} />
+            <Text fontSize='sm'>Aceptado</Text>
+          </HStack>
+          <HStack>
+            <Box bg='yellow.300' w={4} h={4} />
+            <Text fontSize='sm'>Pendiente</Text>
+          </HStack>
+        </Flex>
       </Flex>
       <Calendar
         localizer={localizer}

@@ -1,4 +1,5 @@
 import moment from 'moment';
+moment.locale('es-mx');
 
 export const formatDate = (date :Date, format? :string) => {
   if (!format) {

@@ -10,7 +10,7 @@ export const CalendarItem: React.FC<CalendarItemProps> = ({ event }) => {
   const { customer } = event;
   return (
     <Box>
-      <Text fontWeight='semibold'>{customer.firstName}</Text>
+      <Text fontWeight='semibold' isTruncated>{customer.firstName} {customer.lastName}</Text>
     </Box>
   );
 }

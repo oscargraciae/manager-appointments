@@ -66,7 +66,7 @@ export const Settings: React.FC<SettingsProps> = () => {
               <Form>
                 <VStack spacing={8} align='flex-start'>
                   <InputField inputSize='lg' name='name' label='Nombre del negocio' />
-                  <TextareaField inputSize='lg' name='description' label='Descripción del negocio (opcional)' />
+                  <TextareaField inputSize='lg' name='description' label='Descripción del negocio (opcional)' rows={4} />
                   <FormControl isInvalid={!!errors.businessCategoryId}>
                     <FormLabel fontWeight='bold' fontSize='sm'>Categoría</FormLabel>
                     <Select name='businessCategoryId' size='lg' value={values.businessCategoryId} onChange={handleChange}>
@@ -82,7 +82,7 @@ export const Settings: React.FC<SettingsProps> = () => {
                     </Select>
                     { errors.businessCategoryId && <FormErrorMessage>{errors.businessCategoryId}</FormErrorMessage> }
                   </FormControl>
-                  <InputField inputSize='lg' name='phone' label='Teléfono de contacto (opcional)' />
+                  <InputField inputSize='lg' name='phone' label='Teléfono de contacto' />
                   {/* <HStack spacing={3} w='100%'>
                     <InputField inputSize='lg' name='category' label='Horario de apertura' />
                     <InputField inputSize='lg' name='category' label='Horario de clausura' />

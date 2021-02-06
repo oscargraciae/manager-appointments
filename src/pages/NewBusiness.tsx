@@ -1,7 +1,9 @@
 import { Box, Heading, Progress } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Header } from '../components/general/Header';
 import { Loading } from '../components/general/Loading';
+import { BoardingCover } from '../components/onboarding/BoardingCover';
 import { BoardingHours } from '../components/onboarding/BoardingHours';
 import { BoardingInformation } from '../components/onboarding/BoardingInformation';
 import { BoardingServices } from '../components/onboarding/BoardingServices';
@@ -18,7 +20,6 @@ interface NewBusinessParams {
 }
 
 export const NewBusiness: React.FC = () => {
-  const history = useHistory();
   const params = useParams<NewBusinessParams>();
   const option = params.step !== undefined ? Number(params.step) : 1;
 
@@ -55,11 +56,12 @@ export const NewBusiness: React.FC = () => {
   }, []);
 
   const handleSteps = (step: number) => {
-    // if (step === 4) {
-    //   history.push('/');
-    //   return;
-    // }
     setStep(step)
+  }
+
+  const logout = async () => {
+    await new UserService().logout();
+    window.location.href = '/';
   }
 
   if (!user || isLoading) {
@@ -77,6 +79,8 @@ export const NewBusiness: React.FC = () => {
       case 4:
         return <BoardingHours />
       case 5:
+        return <BoardingCover />
+      case 6:
         return <BoardingSuccess />
       default:
         return <Heading>No se pudo cargar la pagina</Heading>
@@ -85,23 +89,15 @@ export const NewBusiness: React.FC = () => {
 
   return (
     <Box bg='#FFFFFF' height='100vh'>
-      <Box mx='auto' w='800px' py={10}>
+      { business && <Header user={user} business={business} logout={logout} /> }
+      
+      <Box mx='auto' w='800px' py={4}>
         <Box>
-          <Progress value={20 * step} colorScheme='green' />
+          <Progress value={16.66 * step} colorScheme='green' />
         </Box>
-        <Box mt={10}>
+        <Box mt={6}>
           { (user && !isLoading) && buildOnboarding() }
         </Box>
-        {/* <Flex direction='row' mt={6}>
-          <Button variant='link' onClick={goBack}>
-            Atras
-          </Button>
-          <Spacer />
-          <Button size='lg' variant='primary'>
-            Siguiente
-          </Button>
-        </Flex> */}
-        
       </Box>
     </Box>
   );

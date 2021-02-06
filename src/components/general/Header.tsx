@@ -26,19 +26,22 @@ export const Header: React.FC<HeaderProps> = ({ user, business, logout }) => {
   }
   
   return (
-    <Flex h='50px' bg='surface' align='center' justify='center' borderBottomColor='borders' borderBottomWidth={1} py={4} px={8}>
+    <Flex h='66px' bg='surface' align='center' justify='center' borderBottomColor='borders' borderBottomWidth={1} py={4} px={8}>
       <Flex align='center' w='190px'>
         <Link href="/">
           <img src={logo} alt="uorder" width="120" height="40" />
         </Link>
       </Flex>
-      <Text fontWeight='bold'>{business.name}</Text>
-      <Text fontWeight='bold' fontSize='xs' ml={4} color='primary'>Publicado</Text>
+      <Text fontWeight='semibold' color='subtext'>{business.name}</Text>
+      <Text fontWeight='bold' fontSize='xs' ml={4} color={business.isPublic ? 'primary' : 'yellow.300'}>
+        { business.isPublic ? 'Publicado' : 'No publicado' }
+        
+      </Text>
       <Spacer />
       <Menu>
-        <Link href='/' size="sm" variant="primary" mx={3}>Modo cliente</Link>
+        {/* <Link href='/' size="sm" variant="primary" mx={3}>Modo cliente</Link> */}
         <MenuButton as={Link} mx={3} variant='primary'>
-          Cuenta
+          Mi Cuenta
         </MenuButton>
         <MenuList zIndex={3} borderColor="#DDD">
           <MenuItem onClick={logout}>Cerrar sesión</MenuItem>

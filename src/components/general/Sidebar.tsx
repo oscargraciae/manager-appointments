@@ -35,7 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ logout }) => {
 
       <Box mt={3}>
         <MenuLink title='Inicio' icon={CgHome} href='/' />
-        <MenuLink title='Calendario' icon={CgCalendar} href='/calendar' />
+        {/* <MenuLink title='Calendario' icon={CgCalendar} href='/calendar' /> */}
         <MenuLink title='Reservaciones' icon={CgCalendar} href='/bookings' />
         {/* <MenuLink title='Clientes' icon={CgUserList} href='/customers' /> */}
         <MenuLink title='Configuración' icon={CgToolbox} href='/settings' />

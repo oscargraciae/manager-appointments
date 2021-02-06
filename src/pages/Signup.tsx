@@ -39,7 +39,7 @@ export const Signup: React.FC<SignupProps> = ({}) => {
     <Wrapper variant="small">
       <Box shadow='md' my={0} mx="auto" textAlign='center' p={10} bg='surface'>
         <Heading as='h1'>Bienvenido</Heading>
-        <Text mt={2} fontWeight='bold'>Registrate y obten 3 meses gratis.</Text>
+        <Text mt={2} fontWeight='bold'>Registrate gratis.</Text>
         <Box mt={4}>
           <Formik initialValues={initialState} onSubmit={onSubmit} validate={signupValidation}>
             {({ isSubmitting }) => (

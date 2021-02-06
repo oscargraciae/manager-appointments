@@ -3,11 +3,13 @@ import { Box, Button, Flex, FormLabel, Text, useToast, Image } from '@chakra-ui/
 
 import { BusinessService } from '../../services/businessService';
 
-interface UploadCoverProps {}
+interface UploadCoverProps {
+  onUpload?: any
+}
 
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg';
 
-export const UploadCover: React.FC<UploadCoverProps> = ({}) => {
+export const UploadCover: React.FC<UploadCoverProps> = ({ onUpload }) => {
   // hooks
   const toast = useToast();
 
@@ -41,6 +43,11 @@ export const UploadCover: React.FC<UploadCoverProps> = ({}) => {
     });
 
     setIsUplaoding(false);
+
+    if (onUpload) {
+      onUpload();
+    }
+
   }
 
   return (

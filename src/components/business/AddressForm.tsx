@@ -25,6 +25,8 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
   const [latLng, setLatLng] = useState({ lng: -74.5, lat: 40 });
   const [map, setMap] = useState<mapboxgl.Map | null>(null);
   const [mrk, setMrk] = useState<mapboxgl.Marker | null>(null);
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
 
   const mapContainer = useRef<any>(null);
   
@@ -65,9 +67,9 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
     let response : BusinessAddressResponse;
     if (business.id) {
       if (address?.id) {
-        response = await new BusinessAddressService().update({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress }, business.id, address.id);
+        response = await new BusinessAddressService().update({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress, state, city }, business.id, address.id);
       } else {
-        response = await new BusinessAddressService().create({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress }, business.id);
+        response = await new BusinessAddressService().create({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress, state, city }, business.id);
       }
       if (response.success && response.address) {
         setAddresss(response.address);
@@ -82,6 +84,9 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
   const handleSelect = async (address: string) => {
     setGeoAddress(address);
     const results = await geocodeByAddress(address)
+    fillInAddress(results[0]);
+    console.log('Resultados de ubicacion', results);
+    
     const latLng = await getLatLng(results[0]);
     setLatLng(latLng);
     if (map) {
@@ -99,6 +104,23 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
       
     }
   }
+
+  const fillInAddress = (place: google.maps.GeocoderResult) => {
+    const addressComponent : google.maps.GeocoderAddressComponent[] = place.address_components;
+    for (var i = 0; i < addressComponent.length; i++) {
+      if (addressComponent[i].types[0] === 'locality') {
+        const locality : any = addressComponent[i];
+        console.log('locality', locality.long_name);
+        setCity(locality.long_name);
+      }
+      if (addressComponent[i].types[0] === 'administrative_area_level_1') {
+        const administrativeArea : any = addressComponent[i];
+        console.log('administrative_area_level_1', administrativeArea.long_name);
+        setState(administrativeArea.long_name);
+      }
+    }
+  }
+
 
   const onDragEnd = (marker: Marker) => {
     var lngLat = marker.getLngLat();

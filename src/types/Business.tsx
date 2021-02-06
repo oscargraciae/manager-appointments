@@ -1,11 +1,12 @@
 export interface IBusiness {
   id?: number
-  name: string
+  name?: string
   description?: string
   cover?: string 
   phone?: string
   isActive?: boolean
   isCompleted?: boolean
+  isPublic?: boolean
   businessCategoryId?: number
 }
 
