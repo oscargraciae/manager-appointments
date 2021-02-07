@@ -54,14 +54,15 @@ export const BoardingHours: React.FC<BoardingHoursProps> = () => {
       <HStack w='100%' direction='row' justify='center' align='center'>
         <Text w='250px' textAlign='left' fontWeight='semibold'>{label}</Text>
         <FormControl>
-          <Select name={`days[${dayOfWeek}].openFrom`} size='lg' value={openFrom} onChange={handleChange}>
+          <Select name={`days[${dayOfWeek}].openFrom`} size='lg' value={openFrom} onChange={handleChange} isDisabled={!isOpen}>
             { hours.map((time, key) => (
               <option key={key} value={time}>{time}</option>
             ))}
           </Select>
         </FormControl>
+        
         <FormControl>
-          <Select name={`days[${dayOfWeek}].openTill`} size='lg' value={openTill} onChange={handleChange}>
+          <Select name={`days[${dayOfWeek}].openTill`} size='lg' value={openTill} onChange={handleChange} isDisabled={!isOpen}>
             { hours.map((time, key) => (
               <option key={key} value={time}>{time}</option>
             ))}
@@ -98,7 +99,7 @@ export const BoardingHours: React.FC<BoardingHoursProps> = () => {
 
   return (
     <Box textAlign='center'>
-    <Heading as='h2'>¿Cual es el horario de tu negocio?</Heading>
+    <Heading as='h2'>¿Cuál es el horario de tu negocio?</Heading>
       <Text fontSize='xl' fontWeight='500'>Ingresa el horario de tu negocio ya que será la hora disponible para hacer reservaciones.</Text>
       
       <Formik initialValues={initialValue} onSubmit={onSubmit}>
@@ -108,10 +109,10 @@ export const BoardingHours: React.FC<BoardingHoursProps> = () => {
               <VStack w='80%' spacing={3}>
                 { formDay(values, handleChange, setFieldValue, 'Lunes', 0) }
                 { formDay(values, handleChange, setFieldValue, 'Martes', 1) }
-                { formDay(values, handleChange, setFieldValue, 'Miercoles', 2) }
+                { formDay(values, handleChange, setFieldValue, 'Miércoles', 2) }
                 { formDay(values, handleChange, setFieldValue, 'Jueves', 3) }
                 { formDay(values, handleChange, setFieldValue, 'Viernes', 4) }
-                { formDay(values, handleChange, setFieldValue, 'Sabado', 5) }
+                { formDay(values, handleChange, setFieldValue, 'Sábado', 5) }
                 { formDay(values, handleChange, setFieldValue, 'Domingo', 6) }
                 <Button size='lg' alignSelf='flex-end' variant='primary' type='submit' isLoading={isSubmitting}>Siguiente</Button>
               </VStack>

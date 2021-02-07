@@ -36,7 +36,7 @@ export const BookingsListNext: React.FC<BookingsListNextProps> = ({}) => {
 
   return (
     <Table variant="simple" size="md">
-        <TableCaption>*Calculos basados en el tiempo y precio de cada servicio</TableCaption>
+        <TableCaption>*Cálculos basados en el tiempo y precio de cada servicio</TableCaption>
         <Thead>
           <Tr>
             <Th>Cliente</Th>

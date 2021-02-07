@@ -11,7 +11,7 @@ export const BoardingCover: React.FC<BoardingCoverProps> = ({}) => {
   const history = useHistory();
 
   const handleOnUpload = () => {
-    history.push('/new-business/6');
+    // history.push('/new-business/6');
   }
 
   return (
@@ -22,9 +22,11 @@ export const BoardingCover: React.FC<BoardingCoverProps> = ({}) => {
         <UploadCover onUpload={handleOnUpload} />
       </Flex>
 
-      <Button mt={10} variant='outline' onClick={() => history.push('/new-business/6')}>
-        Saltar
-      </Button>
+      <Box textAlign='right' mr={4}>
+        <Button size='lg' mt={10} variant='primary' onClick={() => history.push('/new-business/6')}>
+          Siguiente
+        </Button>
+      </Box>
     </Box>
   );
 }

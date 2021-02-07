@@ -82,9 +82,10 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
 
   return (
     <Table variant="simple" size="md">
-        <TableCaption>*Calculos basados en el tiempo y precio de cada servicio</TableCaption>
+        <TableCaption>*Cálculos basados en el tiempo y precio de cada servicio</TableCaption>
         <Thead>
           <Tr>
+            <Th>#</Th>
             <Th>Cliente</Th>
             <Th>Fecha de servicio</Th>
             <Th>Tiempo de servicio*</Th>
@@ -95,6 +96,7 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
         <Tbody>
           { bookings.map((item: IBooking, index :number) => (
             <Tr fontSize='14px'>
+              <Td>{item.id}</Td>
               <Td
                 textDecor='underline'
                 onClick={() => history.push(`/bookings/${item.id}`)}

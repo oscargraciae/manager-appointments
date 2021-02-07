@@ -18,6 +18,7 @@ import { SettingsHour } from './pages/SettingsHour';
 import { Bookings } from './pages/Bookings';
 import { Booking } from './pages/Booking';
 import { SettingsGallery } from './pages/SettingsGallery';
+import { Services } from './pages/Services';
 
 const App = () => {
   const PrivateRoutes = () => {
@@ -29,8 +30,9 @@ const App = () => {
             <Route path='/' exact component={Home} />
             <Route path='/bookings' exact component={Bookings} />
             <Route path='/bookings/:id' exact component={Booking} />
+            <Route path='/services' exact component={Services} />
             <Route path='/settings' exact component={Settings} />
-            <Route path='/settings/services' exact component={SettingsServices} />
+            {/* <Route path='/settings/services' exact component={SettingsServices} /> */}
             <Route path='/settings/address' exact component={SettingsAddress} />
             <Route path='/settings/location' exact component={SettingsLocation} />
             <Route path='/settings/hours' exact component={SettingsHour} />

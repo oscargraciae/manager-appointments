@@ -59,7 +59,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const copyUrl = (e :any) => {
     if (business && business.name) {
-      const url : string = `${window.location.origin}/${generateName(business.name)}/${business.id}`;
+      const url : string = `${window.location.origin}/b/${generateName(business.name)}/${business.id}`;
       copy(url);
       toast({
         title: 'URL copiada',
@@ -124,7 +124,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </Button>
               </Flex>
               <Box>
-                <QRCode value={`${window.location.origin}/${generateName(business.name)}/${business.id}`} id='businessqr' style={{ display: 'none' }} />
+                <QRCode value={`${window.location.origin}/b/${generateName(business.name)}/${business.id}`} id='businessqr' style={{ display: 'none' }} />
                 {children}
               </Box>
             </Box>

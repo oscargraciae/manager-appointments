@@ -35,8 +35,8 @@ export const BoardingInformation: React.FC<BoardingInformationProps> = ({ setSte
 
   return (
     <Box textAlign='center'>
-      <Heading as='h2'>¿Cual es la dirección de tu negocio?</Heading>
-      <Text fontSize='xl' fontWeight='500'>Ingresa la información lo más precisa posible para que tus clientes puedan llegar.</Text>
+      <Heading as='h2'>¿Cuál es la dirección de tu negocio?</Heading>
+      <Text fontSize='xl' fontWeight='500'>Ingresa la información lo más precisa posible para que tus clientes te puedan localizar.</Text>
       { business && <AddressForm handleSaveAddress={handleSaveAddress} business={business} /> }
     </Box>
   );

@@ -47,7 +47,7 @@ export const DeleteServiceDialog: React.FC<DeleteServiceDialogProps> = ({ isOpen
             </AlertDialogHeader>
 
             <AlertDialogBody>
-            <Text mb={2} fontWeight='bold' fontSize='sm'>¿Estas seguro que quieres eliminar este servicio?</Text>
+            <Text mb={2} fontWeight='bold' fontSize='sm'>¿Estás seguro que quieres eliminar este servicio?</Text>
             <Text fontSize='sm'>No es posible deshacer la operación.</Text>
             </AlertDialogBody>
 

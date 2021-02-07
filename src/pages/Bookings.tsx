@@ -25,7 +25,7 @@ export const Bookings: React.FC<BookingsProps> = ({}) => {
         <Box>
           <HStack mt={4} borderBottomWidth={1} borderColor='borders' p={3}>
             <MenuLink title='Pendientes' onClick={() => setTab(1)} isActive={tab === 1} />
-            <MenuLink title='Proximas' onClick={() => setTab(2)} isActive={tab === 2} />
+            <MenuLink title='Próximas' onClick={() => setTab(2)} isActive={tab === 2} />
             <MenuLink title='Historial' onClick={() => setTab(3)} isActive={tab === 3} />
           </HStack>
           { tab === 1 && <BookingsList /> }

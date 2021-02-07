@@ -10,6 +10,7 @@ import { WrapperSettings } from '../components/general/WrapperSettings';
 import { BusinessAddressService } from '../services/businessAddressService';
 import { BusinessAddress, BusinessAddressResponse } from '../types/BusinessAddress';
 import { TOKEN_MAPBOX } from '../config/constants';
+import { LoadingView } from '../components/general/LoadingView';
 
 interface SettingsLocationProps {
 
@@ -29,6 +30,8 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
   const [latLng, setLatLng] = useState({ lng: -74.5, lat: 40 });
   const [map, setMap] = useState<mapboxgl.Map | null>(null);
   const [mrk, setMrk] = useState<mapboxgl.Marker | null>(null);
+
+  const [isLoading, setIsLoading] = useState(true);
   
   const fetchAddress = async (map: Map) => {
     const { success, address } = await new BusinessAddressService().get(businessContext.id);
@@ -36,7 +39,7 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
       setAddress(address);
       setGeoAddress(address.addressMap);
       setLatLng({ lat: address.lat, lng: address.lng });
-
+      
       if (map) {
         map.jumpTo({ center: [address.lng, address.lat], zoom: 16 });
         const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([address.lng, address.lat]).addTo(map);
@@ -45,6 +48,7 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
         setMrk(marker);
       }
     }
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -103,6 +107,10 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
     setLatLng(lngLat);
   }
 
+  // if (isLoading) {
+  //   return <LoadingView />
+  // }
+
   const initialValues = {
     street: '',
     area: '',
@@ -114,8 +122,7 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
     <ContainerPage title='Configuración'>
       <WrapperSettings>
         <Heading as='h2' size='md' mb={2}>Ubicación</Heading>
-        <Text fontSize='md' fontWeight='500' mb={8} pr={20}>Ingresa correctamente esta información, es la que visualizaran las personas para poder llegar a tu negocio</Text>
-
+        <Text fontSize='md' fontWeight='500' mb={8} pr={20}>Ingresa correctamente esta información, es la que visualizarán las personas para poder llegar a tu negocio</Text>
         <Box>
           <Formik initialValues={initialValues} onSubmit={onSubmit}>
           { (({ isSubmitting }) => (

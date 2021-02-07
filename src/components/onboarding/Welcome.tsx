@@ -42,8 +42,8 @@ export const Welcome: React.FC<WelcomeProps> = ({ user, business }) => {
 
   return (
     <Box textAlign='center'>
-      <Heading as='h2'>Estamos contentos de que estes aquí {user.firstName}.</Heading>
-      <Text fontSize='xl' fontWeight='500'>Estas a un paso de comenzar a organizar tus clientes.</Text>
+      <Heading as='h2'>Estamos contentos de que estés aquí {user.firstName}.</Heading>
+      <Text fontSize='xl' fontWeight='500'>Estás a un paso de comenzar a organizar tus clientes.</Text>
 
       <Formik initialValues={{ name: business ? business.name : '', businessCategoryId: business ? business.businessCategoryId : 0 }} onSubmit={onSubmit} validationSchema={welcomeValidationSchema}>
         { ({ values, isSubmitting, handleChange, errors }) => (
