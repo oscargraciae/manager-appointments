@@ -4,7 +4,9 @@ import {
   CgCalendar,
   CgHome,
   CgUserList,
-  CgToolbox
+  CgToolbox,
+  CgList,
+  CgCalendarDates,
 } from 'react-icons/cg';
 import { Link as Lnk } from 'react-router-dom';
 
@@ -34,10 +36,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ logout }) => {
       </Flex> */}
 
       <Box mt={3}>
-        <MenuLink title='Inicio' icon={CgHome} href='/' />
+        <MenuLink title='Calendario' icon={CgCalendarDates} href='/' />
         {/* <MenuLink title='Calendario' icon={CgCalendar} href='/calendar' /> */}
         <MenuLink title='Reservaciones' icon={CgCalendar} href='/bookings' />
-        <MenuLink title='Servicios' icon={CgCalendar} href='/services' />
+        <MenuLink title='Servicios' icon={CgList} href='/services' />
+        <MenuLink title='Clientes' icon={CgUserList} href='/customers' />
         {/* <MenuLink title='Clientes' icon={CgUserList} href='/customers' /> */}
         <MenuLink title='Configuración' icon={CgToolbox} href='/settings' />
       </Box>

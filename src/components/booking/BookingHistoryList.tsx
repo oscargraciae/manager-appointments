@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, Box, Text, Flex, IconButton, Tooltip } from "@chakra-ui/react"
-import moment from 'moment';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption } from "@chakra-ui/react"
 
 import { IBooking } from '../../types/IBooking';
 import { formatDate } from '../../utils/formatDate';
 import { minutesToHour } from '../../utils/minutesToHours';
 import { BookingService } from '../../services/bookingService';
 import { LoadingView } from '../general/LoadingView';
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 
 interface BookingsListHistoryProps {}
 
@@ -18,7 +16,8 @@ export const BookingsListHistory: React.FC<BookingsListHistoryProps> = ({}) => {
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const params = { startDate: moment(new Date()).toISOString() };
+      // const params = { startDate: moment(new Date()).toISOString() };
+      const params = {};
       
       const { bookings } = await new BookingService().getAll(params);
       setBookings(bookings);
@@ -31,11 +30,25 @@ export const BookingsListHistory: React.FC<BookingsListHistoryProps> = ({}) => {
     return <LoadingView />
   }
 
+  const statusColor = (id: number) : string => {
+    switch (id) {
+      case 1:
+        return 'yellow.500'
+      case 2:
+        return 'primary'
+      case 3:
+        return 'red.500'
+      default:
+        return 'primary'
+    }
+}
+
   return (
     <Table variant="simple" size="md">
         <TableCaption>*Cálculos basados en el tiempo y precio de cada servicio</TableCaption>
         <Thead>
           <Tr>
+            <Th>#</Th>
             <Th>Cliente</Th>
             <Th>Fecha de servicio</Th>
             <Th>Tiempo de servicio*</Th>
@@ -46,11 +59,12 @@ export const BookingsListHistory: React.FC<BookingsListHistoryProps> = ({}) => {
         <Tbody>
           { bookings.map((item: IBooking) => (
             <Tr fontSize='14px'>
+              <Td>{item.id}</Td>
               <Td>{item.customer?.firstName} {item.customer?.lastName}</Td>
               <Td>{item.bookingDate ? formatDate(item.bookingDate) : ''}</Td>
               <Td>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
               <Td>${item.totalPrice}MXN</Td>
-              <Td>{item.bookingStatusId === 3 ? 'Cancelada' : 'Terminada'}</Td>
+              <Td color={statusColor(item.bookingStatus.id)}>{item.bookingStatus.name}</Td>
             </Tr>
           )) }
         </Tbody>

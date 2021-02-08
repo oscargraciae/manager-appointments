@@ -19,6 +19,7 @@ import { Bookings } from './pages/Bookings';
 import { Booking } from './pages/Booking';
 import { SettingsGallery } from './pages/SettingsGallery';
 import { Services } from './pages/Services';
+import { Customers } from './pages/Customers';
 
 const App = () => {
   const PrivateRoutes = () => {
@@ -32,6 +33,7 @@ const App = () => {
             <Route path='/bookings/:id' exact component={Booking} />
             <Route path='/services' exact component={Services} />
             <Route path='/settings' exact component={Settings} />
+            <Route path='/customers' exact component={Customers} />
             {/* <Route path='/settings/services' exact component={SettingsServices} /> */}
             <Route path='/settings/address' exact component={SettingsAddress} />
             <Route path='/settings/location' exact component={SettingsLocation} />

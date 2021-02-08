@@ -1,12 +1,9 @@
-import { Box, Button, Flex, HStack, Link, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
+import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import React, { useState } from 'react'
 import { BookingsListHistory } from '../components/booking/BookingHistoryList';
 import { BookingsListNext } from '../components/booking/BookingListNext';
 import { BookingsList } from '../components/booking/BookingsList';
 import { ContainerPage } from '../components/general/ContainerPage';
-import { LoadingView } from '../components/general/LoadingView';
-import { BookingService } from '../services/bookingService';
-import { IBooking } from '../types/IBooking';
 
 interface BookingsProps {}
 
@@ -26,7 +23,7 @@ export const Bookings: React.FC<BookingsProps> = ({}) => {
           <HStack mt={4} borderBottomWidth={1} borderColor='borders' p={3}>
             <MenuLink title='Pendientes' onClick={() => setTab(1)} isActive={tab === 1} />
             <MenuLink title='Próximas' onClick={() => setTab(2)} isActive={tab === 2} />
-            <MenuLink title='Historial' onClick={() => setTab(3)} isActive={tab === 3} />
+            <MenuLink title='Todas' onClick={() => setTab(3)} isActive={tab === 3} />
           </HStack>
           { tab === 1 && <BookingsList /> }
           { tab === 2 && <BookingsListNext /> }

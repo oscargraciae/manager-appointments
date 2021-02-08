@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Flex, FormLabel, Text, useToast, Image, VStack, SimpleGrid, Wrap, IconButton } from '@chakra-ui/react';
-import { IoIosAdd } from 'react-icons/io';
+import { Box, Button, Flex, FormLabel, Text, useToast, Image, Wrap, IconButton } from '@chakra-ui/react';
 import { RiDeleteBin6Line } from 'react-icons/ri'
-
 
 import { BusinessService } from '../../services/businessService';
 import { LoadingView } from '../general/LoadingView';
@@ -13,7 +11,6 @@ const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg';
 
 export const UploadGallery: React.FC<UploadGalleryProps> = ({}) => {
   // hooks
-  const toast = useToast();
 
   // state
   const [photos, setPhotos] = useState<object[]>([]);
@@ -28,8 +25,6 @@ export const UploadGallery: React.FC<UploadGalleryProps> = ({}) => {
         id: item.id,
       }))
 
-      console.log('Files fetvh', files);
-      
       setPhotos(files);
     }
     setIsLoading(false);
@@ -53,26 +48,24 @@ export const UploadGallery: React.FC<UploadGalleryProps> = ({}) => {
     const newPhotos = [...photos, ...newFiles]
     setPhotos(newPhotos);
 
-    const dataFiles = new FormData();
+    
     for (let i = 0; i < files.length; i++) {
-      dataFiles.append('files', files[i]);
+      const dataFiles = new FormData();
+      dataFiles.append('file', files[i]);
+      const response = await new BusinessService().uplaodGallery(dataFiles);
+      console.log('Respuesta imagenes', response);
     }
     
-    const response = await new BusinessService().uplaodGallery(dataFiles);
+    
 
-    if (response.success) {
-      toast({
-        title: "Datos actualizados.",
-        status: "success",
-        isClosable: true,
-        position: 'top'
-      });
-      // setTimeout(() => {
-      //   // window.location.reload();
-      //   fetch();
-      //   setIsUplaoding(false);
-      // }, 5000)
-    }
+    // if (response.success) {
+    //   toast({
+    //     title: "Datos actualizados.",
+    //     status: "success",
+    //     isClosable: true,
+    //     position: 'top'
+    //   });
+    // }
     setIsUplaoding(false);
     setIsLoading(false);
   }

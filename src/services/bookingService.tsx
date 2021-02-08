@@ -11,4 +11,6 @@ export class BookingService extends HttpClient {
   getAll = (params? :any) => this.instance.get(`/bookings?${propsToParams(params)}`);
   get = (id :number) => this.instance.get(`/bookings/${id}`);
   update = (id :number, data :IBooking) => this.instance.put(`/bookings/${id}`, data);
+  accepted = (id :number) => this.instance.put(`/bookings/${id}/accepted`);
+  canceled = (id :number) => this.instance.put(`/bookings/${id}/canceled`);
 }

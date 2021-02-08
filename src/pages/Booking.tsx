@@ -55,7 +55,7 @@ export const Booking: React.FC<BookingProps> = ({}) => {
   const handleToAcept = async () => {
     if (id) {
       setIsLoading(true);
-      const response = await new BookingService().update(id, { bookingStatusId: 2 });
+      const response = await new BookingService().accepted(id);
       if (response.success) {
         fetchBooking();
       }
@@ -67,7 +67,7 @@ export const Booking: React.FC<BookingProps> = ({}) => {
   const handleToCancel = async () => {
     if (id) {
       setIsLoading(true);
-      const response = await new BookingService().update(id, { bookingStatusId: 3 });
+      const response = await new BookingService().canceled(id);
       if (response.success) {
         fetchBooking();
       }

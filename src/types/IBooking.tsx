@@ -15,4 +15,10 @@ export interface IBooking {
   customer?: User
   createdAt?: Date
   bookingStatusId?: number
+  bookingStatus: IBookingStatus
+}
+
+interface IBookingStatus {
+  id: number
+  name: string
 }

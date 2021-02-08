@@ -43,7 +43,7 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
     console.log('Booking id', id);
     if (id) {
       setBookingId(id);
-      const response = await new BookingService().update(id, { bookingStatusId: 2 });
+      const response = await new BookingService().accepted(id);
       if (response.success) {
         setBookings([
           ...bookings.slice(0, index),
@@ -63,7 +63,7 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
   const handleToCancel = async (index :number, id? :number) => {
     if (id) {
       setBookingId(id);
-      const response = await new BookingService().update(id, { bookingStatusId: 3 });
+      const response = await new BookingService().canceled(id);
       if (response.success) {
         setBookings([
           ...bookings.slice(0, index),

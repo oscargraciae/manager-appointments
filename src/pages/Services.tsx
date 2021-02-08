@@ -1,9 +1,8 @@
-import { AlertDialog, Box, Button, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Flex, Spacer, Text, useDisclosure } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react'
 import { ContainerPage } from '../components/general/ContainerPage';
 import { UserContext } from '../components/general/Layout';
 import { LoadingView } from '../components/general/LoadingView';
-import { WrapperSettings } from '../components/general/WrapperSettings';
 import { DeleteServiceDialog } from '../components/services/DeleteServiceDialog';
 import { ModalNewService } from '../components/services/ModalNewService';
 import { ServiceList } from '../components/services/ServiceList';
@@ -71,7 +70,7 @@ export const Services: React.FC<ServicesProps> = ({ }) => {
       <ContainerPage title='Servicios'>
         <Flex direction='row' align='center'>
           <Box>
-            <Text fontSize='md' fontWeight='500' mb={8} pr={20}>Añade tantos servicios necesites para que tus clientes sepan todo lo que ofreces.</Text>
+            <Text fontSize='md' fontWeight='500' mb={8} pr={20}>Añade tantos servicios necesites para que tus clientes conozcan todo lo que ofreces.</Text>
           </Box>
           <Spacer />
           <Box>
