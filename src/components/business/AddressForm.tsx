@@ -11,6 +11,7 @@ import { BusinessAddressService } from '../../services/businessAddressService';
 import { TOKEN_MAPBOX } from '../../config/constants';
 import { IBusiness } from '../../types/Business';
 import { BusinessAddress, BusinessAddressResponse } from '../../types/BusinessAddress';
+import { useGoogleMaps } from '../../hooks/useMap';
 
 interface AddressFormProps {
   handleSaveAddress: any
@@ -22,54 +23,35 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
   const [address, setAddresss] = useState<BusinessAddress | null>(null);
   
   const [geoAddress, setGeoAddress] = useState<string>('');
-  const [latLng, setLatLng] = useState({ lng: -74.5, lat: 40 });
-  const [map, setMap] = useState<mapboxgl.Map | null>(null);
-  const [mrk, setMrk] = useState<mapboxgl.Marker | null>(null);
+  const [coords, setCoords] = useState({ lat: 25.6866142, lng: -100.3161126 });
+  
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
 
-  const mapContainer = useRef<any>(null);
+  const { refContainer, addMarker, changeLocation } = useGoogleMaps({ coords, setCoords });
   
-  const fetchAddress = async (map: Map) => {
+  const fetchAddress = async () => {
     const { success, address } = await new BusinessAddressService().get(business.id);
     if (success && address) {
       setAddresss(address);
       setGeoAddress(address.addressMap);
-      setLatLng({ lat: address.lat, lng: address.lng });
-
-      if (map) {
-        map.jumpTo({ center: [address.lng, address.lat], zoom: 16 });
-        const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([address.lng, address.lat]).addTo(map);
-        marker.on('dragend', () => onDragEnd(marker));
-        setMrk(marker);
-      }
+      setCoords({ lat: address.lat, lng: address.lng });
+      changeLocation({ lat: address.lat, lng: address.lng });
+      addMarker({ lat: address.lat, lng: address.lng });
     }
   }
 
   useEffect(() => {
-    mapboxgl.accessToken = TOKEN_MAPBOX;
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-      center: [-100.3161126, 25.6866142], // starting position [lng, lat]
-      zoom: 16 // starting zoom
-    });
-    setMap(map);
-
-    
-    map.on('load', function() {
-      fetchAddress(map);
-    });
-
-  }, [])
+    fetchAddress();
+  }, []);
 
   const onSubmit = async () => {
     let response : BusinessAddressResponse;
     if (business.id) {
       if (address?.id) {
-        response = await new BusinessAddressService().update({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress, state, city }, business.id, address.id);
+        response = await new BusinessAddressService().update({ lat: coords.lat, lng: coords.lng, addressMap: geoAddress, state, city }, business.id, address.id);
       } else {
-        response = await new BusinessAddressService().create({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress, state, city }, business.id);
+        response = await new BusinessAddressService().create({ lat: coords.lat, lng: coords.lng, addressMap: geoAddress, state, city }, business.id);
       }
       if (response.success && response.address) {
         setAddresss(response.address);
@@ -85,24 +67,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
     setGeoAddress(address);
     const results = await geocodeByAddress(address)
     fillInAddress(results[0]);
-    console.log('Resultados de ubicacion', results);
     
     const latLng = await getLatLng(results[0]);
-    setLatLng(latLng);
-    if (map) {
-      
-      // map.jumpTo({ 'center': [latLng.lng, latLng.lat], 'zoom': 14 });
-      map.jumpTo({ center: [latLng.lng, latLng.lat], zoom: 16 });
-
-      if (!mrk) {
-        const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([latLng.lng, latLng.lat]).addTo(map);
-        marker.on('dragend', () => onDragEnd(marker));
-        setMrk(marker);
-      } else {
-        mrk.setLngLat([latLng.lng, latLng.lat]);
-      }
-      
-    }
+    setCoords(latLng);
+    changeLocation(latLng);
+    addMarker(latLng);
   }
 
   const fillInAddress = (place: google.maps.GeocoderResult) => {
@@ -122,19 +91,13 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
   }
 
 
-  const onDragEnd = (marker: Marker) => {
-    var lngLat = marker.getLngLat();
-    setLatLng(lngLat);
-    console.log('NUEVAS CORDENADAS', lngLat);
-  }
-
   const initialValues = {
     street: '',
     area: '',
     city: '',
     state: ''
   }
-
+  
   return (
     <Box>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -168,7 +131,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({ handleSaveAddress, bus
               </VStack>
             </Flex>
             <Box>
-              <Box w='100%' h='200px' ref={el => (mapContainer.current = el)}></Box>
+              <Box ref={refContainer} h='200px' w='100%' />
               {/* <Text fontWeight='bold' fontSize='xs' mt={2}>Mueve el marcador si es necesario pero asegurate que este en el lugar correcto.</Text> */}
               <Text fontWeight='bold' fontSize='xs' mt={2}>Si es necesario, ajusta el mapa para que el pin aparezca en la ubicación correcta.</Text>
               

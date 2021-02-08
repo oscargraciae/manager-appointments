@@ -41,8 +41,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       // Aqui se debe de enviar al login, cerrar sesion o mostrar alguna pantalla de error
     };
 
-    console.log('Datos de usuario', user);
-    
     if (!user.businessUser || !user.businessUser.business?.isCompleted) {
       // alert('Este usuario no tiene tienda, favor de registrar una.')
       history.push('/new-business');

@@ -7,8 +7,6 @@ export const getMin = (hours :IHour[]) => {
     }
   });
 
-  console.log('Orden get min', hours);
-  
   return hours[0].openFrom;
 }
 

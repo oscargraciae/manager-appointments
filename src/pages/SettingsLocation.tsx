@@ -11,6 +11,7 @@ import { BusinessAddressService } from '../services/businessAddressService';
 import { BusinessAddress, BusinessAddressResponse } from '../types/BusinessAddress';
 import { TOKEN_MAPBOX } from '../config/constants';
 import { LoadingView } from '../components/general/LoadingView';
+import { useGoogleMaps } from '../hooks/useMap';
 
 interface SettingsLocationProps {
 
@@ -22,58 +23,39 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
   
   // Hooks
   const toast = useToast();
-  const mapContainer = useRef<any>(null);
+  
 
   // States
   const [address, setAddress] = useState<BusinessAddress | null>(null);
   const [geoAddress, setGeoAddress] = useState<string>('');
-  const [latLng, setLatLng] = useState({ lng: -74.5, lat: 40 });
-  const [map, setMap] = useState<mapboxgl.Map | null>(null);
-  const [mrk, setMrk] = useState<mapboxgl.Marker | null>(null);
+  const [coords, setCoords] = useState({ lat: 25.6866142, lng: -100.3161126 });
 
   const [isLoading, setIsLoading] = useState(true);
   
-  const fetchAddress = async (map: Map) => {
+  const { refContainer, addMarker, changeLocation } = useGoogleMaps({ coords, setCoords });
+  
+  const fetchAddress = async () => {
     const { success, address } = await new BusinessAddressService().get(businessContext.id);
     if (success && address) {
       setAddress(address);
       setGeoAddress(address.addressMap);
-      setLatLng({ lat: address.lat, lng: address.lng });
-      
-      if (map) {
-        map.jumpTo({ center: [address.lng, address.lat], zoom: 16 });
-        const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([address.lng, address.lat]).addTo(map);
-        marker.on('dragend', () => onDragEnd(marker));
-        // const marker : Marker = new mapboxgl.Marker({ draggable: true }).setLngLat([latLng.lng, latLng.lat]).addTo(map);
-        setMrk(marker);
-      }
+      setCoords({ lat: address.lat, lng: address.lng });
+      changeLocation({ lat: address.lat, lng: address.lng });
+      addMarker({ lat: address.lat, lng: address.lng });
     }
     setIsLoading(false);
   }
 
   useEffect(() => {
-    mapboxgl.accessToken = TOKEN_MAPBOX;
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-      center: [-100.3161126, 25.6866142], // starting position [lng, lat]
-      zoom: 16 // starting zoom
-    });
-    setMap(map);
-
-    
-    map.on('load', function() {
-      fetchAddress(map);
-    });
-
+    fetchAddress();
   }, [])
+
 
   const onSubmit = async () => {
     let response : BusinessAddressResponse;
     if (businessContext.id && address?.id) {
-      response = await new BusinessAddressService().update({ lat: latLng.lat, lng: latLng.lng, addressMap: geoAddress }, businessContext.id, address.id);
+      response = await new BusinessAddressService().update({ lat: coords.lat, lng: coords.lng, addressMap: geoAddress }, businessContext.id, address.id);
       if (response.success) {
-        // setAddress(response.address);
         toast({
           title: "Datos actualizados.",
           status: "success",
@@ -88,28 +70,11 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
     setGeoAddress(address);
     const results = await geocodeByAddress(address)
     const latLng = await getLatLng(results[0]);
-    setLatLng(latLng);
-    if (map) {
-      
-      // map.jumpTo({ 'center': [latLng.lng, latLng.lat], 'zoom': 14 });
-      map.jumpTo({ center: [latLng.lng, latLng.lat], zoom: 16 });
-      if (mrk) {
-        mrk.setLngLat([latLng.lng, latLng.lat]);
-      }
-      // console.log('viejo marcado');
-      
-      // marker.on('dragend', () => onDragEnd(marker));
-    }
+    
+    setCoords(latLng);
+    changeLocation(latLng);
+    addMarker(latLng);
   }
-
-  const onDragEnd = (marker: Marker) => {
-    var lngLat = marker.getLngLat();
-    setLatLng(lngLat);
-  }
-
-  // if (isLoading) {
-  //   return <LoadingView />
-  // }
 
   const initialValues = {
     street: '',
@@ -154,7 +119,7 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
                 </VStack>
               </Flex>
               <Box>
-                <Box w='100%' h='300px' ref={el => (mapContainer.current = el)}></Box>
+                <Box ref={refContainer} h='200px' w='100%' />
                 <Text fontWeight='bold' fontSize='xs' mt={2}>Si es necesario, ajusta el mapa para que el pin aparezca en la ubicación correcta.</Text>
                 
               </Box>
