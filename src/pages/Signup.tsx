@@ -34,6 +34,7 @@ export const Signup: React.FC<SignupProps> = ({}) => {
     password: '',
     firstName: '',
     lastName: '',
+    phone: '',
   }
   return (
     <Wrapper variant="small">
@@ -47,6 +48,7 @@ export const Signup: React.FC<SignupProps> = ({}) => {
                 <VStack spacing={4}>
                   <InputField name='firstName' label='Nombre' />
                   <InputField name='lastName' label='Apellido' />
+                  <InputField name='phone' label='Tu número de teléfono' />
                   <InputField name='email' label='Correo eletrónico' />
                   <PasswordInputField name='password' label='Contraseña' />
                   <Button isLoading={isSubmitting} type='submit' size='lg' variant='primary' isFullWidth>Registrate</Button>

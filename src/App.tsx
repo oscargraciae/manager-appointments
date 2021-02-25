@@ -14,6 +14,7 @@ import { NewBusiness } from './pages/NewBusiness';
 import { SettingsAddress } from './pages/SettingsAddress';
 import { SettingsLocation } from './pages/SettingsLocation';
 import { SettingsServices } from './pages/SettingsServices';
+import { SettingsAdvanced } from './pages/SettingsAdvanced';
 import { SettingsHour } from './pages/SettingsHour';
 import { Bookings } from './pages/Bookings';
 import { Booking } from './pages/Booking';
@@ -39,6 +40,7 @@ const App = () => {
             <Route path='/settings/location' exact component={SettingsLocation} />
             <Route path='/settings/hours' exact component={SettingsHour} />
             <Route path='/settings/photos' exact component={SettingsGallery} />
+            <Route path='/settings/advanced' exact component={SettingsAdvanced} />
             {/* <Route component={NotFound}/> */}
           </Layout>
         </Route>

@@ -7,6 +7,8 @@ import * as Yup from 'yup';
     .max(200, 'Maximo 200 letras.')
     .required('Ingresa un nombre'),
 
+    phone: Yup.string().required('Ingresa un teléfono.'),
+
     businessCategoryId: Yup.number()
     .min(1, 'Selecciona una categoría')
     .required('Selecciona una categoría'),

@@ -23,8 +23,6 @@ export const Settings: React.FC<SettingsProps> = () => {
   useEffect(() => {
     const fetchBusiness = async () => {
       const { business } = await new BusinessService().get();
-      console.log('Business', business);
-      
       setBusiness(business);
     }
     fetchBusiness();
@@ -71,22 +69,10 @@ export const Settings: React.FC<SettingsProps> = () => {
                     <FormLabel fontWeight='bold' fontSize='sm'>Categoría</FormLabel>
                     <Select name='businessCategoryId' size='lg' value={values.businessCategoryId} onChange={handleChange}>
                       <option value='0' >Selecciona una categoría</option>
-                      <option value='1' >Salon</option>
-                      <option value='2' >Spa</option>
-                      <option value='3' >Barberia</option>
-                      <option value='4' >Tatuajes</option>
-                      <option value='5' >Maquillaje</option>
-                      <option value='6' >Podologia</option>
-                      <option value='7' >Servicios para el hogar</option>
-                      <option value='8' >Servicios para el mascotas</option>
                     </Select>
                     { errors.businessCategoryId && <FormErrorMessage>{errors.businessCategoryId}</FormErrorMessage> }
                   </FormControl>
                   <InputField inputSize='lg' name='phone' label='Teléfono de contacto' />
-                  {/* <HStack spacing={3} w='100%'>
-                    <InputField inputSize='lg' name='category' label='Horario de apertura' />
-                    <InputField inputSize='lg' name='category' label='Horario de clausura' />
-                  </HStack> */}
                   <Button variant='primary' size='lg' type='submit' isLoading={isSubmitting}>
                     Guardar
                   </Button>

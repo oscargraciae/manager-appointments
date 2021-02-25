@@ -14,6 +14,10 @@ export const signupValidation = (values: User) => {
     errors.password = 'Ingresa una contraseña'
   }
 
+  if (!values.phone) {
+    errors.phone = 'Ingresa una teléfono.'
+  }
+
   if (!values.firstName) {
     errors.firstName = 'Ingresa un nombre'
   }

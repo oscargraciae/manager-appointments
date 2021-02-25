@@ -70,7 +70,7 @@ export const BoardingHours: React.FC<BoardingHoursProps> = () => {
         </FormControl>
         <Tooltip label={isOpen ? 'Cerrar este día' : 'Abrir este día'} fontSize="md">
           <IconButton
-            colorScheme="teal"
+            colorScheme={isOpen ? 'blue' : 'red'}
             aria-label="Call Segun"
             size="lg"
             icon={isOpen ? <FaDoorOpen /> : <FaDoorClosed />}

@@ -119,7 +119,7 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
   }
   
   return (
-    <Box>
+    <Box h='80vh'>
       <Flex pb={2}>
         <Flex mb={1}>
           <HStack mr={3}>

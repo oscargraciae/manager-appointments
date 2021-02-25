@@ -95,7 +95,7 @@ export const SettingsHour: React.FC<SettingsHourProps> = () => {
         </FormControl>
         <Tooltip label={isOpen ? 'Cerrar este día' : 'Abrir este día'} fontSize="md">
           <IconButton
-            colorScheme="teal"
+            colorScheme={isOpen ? 'blue' : 'red'}
             aria-label="Call Segun"
             size="lg"
             icon={isOpen ? <FaDoorOpen /> : <FaDoorClosed />}
@@ -110,8 +110,6 @@ export const SettingsHour: React.FC<SettingsHourProps> = () => {
     return <LoadingView />
   }
 
-  console.log('my hours');
-  
   const initialValue = {
     days: [
       { businessId: businessContext.id, openFrom: myHours[0] ? myHours[0].openFrom :  '9:00', openTill: myHours[0] ? myHours[0].openTill : '20:00', isOpen: myHours[0] ? myHours[0].isOpen : true, dayOfWeek: 0 },

@@ -7,6 +7,8 @@ export interface IBusiness {
   isActive?: boolean
   isCompleted?: boolean
   isPublic?: boolean
+  hasBookingConfimation?: boolean
+  hasParallelBookings?: boolean
   businessCategoryId?: number
 }
 
