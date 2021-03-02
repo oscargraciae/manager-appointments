@@ -18,7 +18,7 @@ export const SettingsGallery: React.FC<SettingsGalleryProps> = () => {
       <WrapperSettings>
         <Heading as='h2' size='md' mb={2}>Fotos</Heading>
 
-        <Flex w='90%' justify='space-between' mt={4}>
+        <Flex flexDirection={{ base: 'column', md: 'row' }} w='90%' justify='space-between' mt={4}>
           <UploadCover />
         </Flex>
 

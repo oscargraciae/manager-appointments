@@ -17,15 +17,12 @@ const MenuLink: React.FC<{ title: string, href: string }> = ({ title, href }) =>
 export const WrapperSettings: React.FC<WrapperSettingsProps> = ({ children }) => {
   return (
     <Box>
-      <HStack mt={4} borderBottomWidth={1} borderColor='borders' py={3}>
-        {/* <MenuLink title='Servicios' href='/settings/services' /> */}
+      <HStack mt={4} borderBottomWidth={1} borderColor='borders' py={3} overflow='auto'>
         <MenuLink title='Datos básicos' href='/settings' />
         <MenuLink title='Ubicación' href='/settings/location' />
-        {/* <MenuLink title='Dirección' href='/settings/address' /> */}
         <MenuLink title='Horario' href='/settings/hours' />
         <MenuLink title='Fotos' href='/settings/photos' />
         <MenuLink title='Generales' href='/settings/advanced' />
-        {/* <MenuLink title='Usuario' href='/settings' /> */}
       </HStack>
 
       <Box my={4} bg='surface' borderColor='borders' borderWidth={1} p={6} borderRadius={3}>

@@ -147,7 +147,7 @@ export const BookingCalendar: React.FC<BookingCalendarProps> = ({}) => {
         components={{
           event: CalendarItem
         }}
-        defaultView='week'
+        defaultView='day'
         views={{ week: true, day: true, agenda: true }}
         min={moment(rangeTime.min, [moment.ISO_8601, 'HH:mm']).toDate()}
         max={moment(rangeTime.max, [moment.ISO_8601, 'HH:mm']).toDate()}

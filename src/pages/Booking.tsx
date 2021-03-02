@@ -107,7 +107,7 @@ export const Booking: React.FC<BookingProps> = ({}) => {
   
   return (
     <>
-      <Box bg={colorStatus(booking.bookingStatusId)} color='#FFF' py={6} px={12} borderBottomWidth={1} borderColor='borders'>
+      <Box bg={colorStatus(booking.bookingStatusId)} color='#FFF' py={6} px={{ base: 6, md: 12 }} borderBottomWidth={1} borderColor='borders'>
         <VStack align='left' justify='flex-start'>
           <Heading as='h1'>{booking.customer.firstName} {booking.customer.lastName}</Heading>
           <Text color='#FFF'>Teléfono: {booking.customer.phone}</Text>
@@ -116,8 +116,8 @@ export const Booking: React.FC<BookingProps> = ({}) => {
       </Box>
       
       <ContainerPage>
-        <Flex justify='space-between'>
-          <Flex direction='column' w='62%'>
+        <Flex flexDirection={{ base: 'column', md: 'row' }} justify='space-between'>
+          <Flex direction='column' w={{ base: '100%', md: '62%' }}>
             <Box bg='surface' py={6} px={6} borderWidth={1} borderColor='borders' mb={6}>
               <Heading as='h4' fontSize='2xl' mb={6}>Resumen del servicio</Heading>
 
@@ -165,7 +165,7 @@ export const Booking: React.FC<BookingProps> = ({}) => {
             </Box>
           </Flex>
 
-          <Box w='35%'>
+          <Box w={{ base: '100%', md: '35%' }}>
             { booking.bookingStatusId === 1 &&
             <Box bg='surface' py={6} px={6} borderWidth={1} borderColor='borders'>
               <Flex justifyContent='center' direction='column' alignItems='center'>

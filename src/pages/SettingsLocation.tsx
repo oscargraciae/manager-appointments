@@ -87,7 +87,7 @@ export const SettingsLocation: React.FC<SettingsLocationProps> = () => {
     <ContainerPage title='Configuración'>
       <WrapperSettings>
         <Heading as='h2' size='md' mb={2}>Ubicación</Heading>
-        <Text fontSize='md' fontWeight='500' mb={8} pr={20}>Ingresa correctamente esta información, es la que visualizarán las personas para poder llegar a tu negocio</Text>
+        <Text fontSize='md' fontWeight='500' mb={8} pr={{ base: 2, md: 20 }}>Ingresa correctamente esta información, es la que visualizarán las personas para poder llegar a tu negocio</Text>
         <Box>
           <Formik initialValues={initialValues} onSubmit={onSubmit}>
           { (({ isSubmitting }) => (

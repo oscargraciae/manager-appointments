@@ -57,7 +57,7 @@ export const Settings: React.FC<SettingsProps> = () => {
   return (
     <ContainerPage title='Configuración'>
       <WrapperSettings>
-        <Box w='70%'>
+        <Box w={{ base: '100%', md: '70%' }}>
           <Heading as='h2' size='md' mb={8}>Datos básicos</Heading>
           <Formik initialValues={initialValues} onSubmit={onSubmit} validate={businessValidation}>
             { (({ isSubmitting, values, handleChange, errors }) => (

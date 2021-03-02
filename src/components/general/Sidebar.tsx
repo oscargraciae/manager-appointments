@@ -30,11 +30,7 @@ const MenuLink: React.FC<{ title: string, icon: any, href: string }> = ({title, 
 
 export const Sidebar: React.FC<SidebarProps> = ({ logout }) => {
   return (
-    <Box w='210px' h='100vh' bg='surface' shadow='sm' borderRightWidth={1} borderRightColor='borders' pos='sticky' top='0' left='0'>
-      {/* <Flex py={3} textAlign='center' justify='center' align='center'>
-        <Image src={ReserlyLogo} alt='Reserly' h='64px' />
-      </Flex> */}
-
+    <Box w='210px' h='100vh' bg='surface' shadow='sm' borderRightWidth={1} borderRightColor='borders' pos='sticky' top='0' left='0' display={{ base: 'none', md: 'block' }} >
       <Box mt={3}>
         <MenuLink title='Calendario' icon={CgCalendarDates} href='/' />
         {/* <MenuLink title='Calendario' icon={CgCalendar} href='/calendar' /> */}

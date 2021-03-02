@@ -52,7 +52,7 @@ export const UploadCover: React.FC<UploadCoverProps> = ({ onUpload }) => {
 
   return (
     <>
-      <Box w='60%' pr={10}>
+      <Box w={{ base: '100%', md: '60%' }} pr={10}>
         <Text fontWeight='bold' mb={4}>Foto de portada</Text>
         <Text fontSize='sm' color='subtext' mb={3}>Tu foto de portada es la primera impresión que tienen tus clientes de tu negocio.</Text>
         <Text fontSize='sm' color='subtext'>
@@ -73,7 +73,7 @@ export const UploadCover: React.FC<UploadCoverProps> = ({ onUpload }) => {
           style={{ display: 'none' }}
         />
       </Box>
-      <Flex w='40%' justify='center' alignItems='center'>
+      <Flex mt={3} w={{ base: '100%', md: '40%' }} justify='center' alignItems='center'>
         <Image src={cover} w='300px' h='200px' objectFit="cover" loading='eager' />
       </Flex>
     </>

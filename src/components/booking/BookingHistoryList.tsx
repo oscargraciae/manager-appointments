@@ -48,23 +48,23 @@ export const BookingsListHistory: React.FC<BookingsListHistoryProps> = ({}) => {
         <TableCaption>*Cálculos basados en el tiempo y precio de cada servicio</TableCaption>
         <Thead>
           <Tr>
-            <Th>#</Th>
+            <Th display={{ base: 'none', md: 'block' }}>#</Th>
             <Th>Cliente</Th>
             <Th>Fecha de servicio</Th>
-            <Th>Tiempo de servicio*</Th>
-            <Th>Total a cobrar*</Th>
-            <Th>Estatus</Th>
+            <Th display={{ base: 'none', md: 'block' }}>Tiempo de servicio*</Th>
+            <Th display={{ base: 'none', md: 'block' }}>Total a cobrar*</Th>
+            <Th display={{ base: 'none', md: 'block' }}>Estatus</Th>
           </Tr>
         </Thead>
         <Tbody>
           { bookings.map((item: IBooking) => (
             <Tr fontSize='14px'>
-              <Td>{item.id}</Td>
+              <Td display={{ base: 'none', md: 'block' }}>{item.id}</Td>
               <Td>{item.customer?.firstName} {item.customer?.lastName}</Td>
               <Td>{item.bookingDate ? formatDate(item.bookingDate) : ''}</Td>
-              <Td>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
-              <Td>${item.totalPrice}MXN</Td>
-              <Td color={statusColor(item.bookingStatus.id)}>{item.bookingStatus.name}</Td>
+              <Td display={{ base: 'none', md: 'block' }}>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
+              <Td display={{ base: 'none', md: 'block' }}>${item.totalPrice}MXN</Td>
+              <Td display={{ base: 'none', md: 'block' }} color={statusColor(item.bookingStatus.id)}>{item.bookingStatus.name}</Td>
             </Tr>
           )) }
         </Tbody>

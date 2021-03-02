@@ -91,11 +91,11 @@ export const NewBusiness: React.FC = () => {
     <Box bg='#FFFFFF' height='100vh'>
       { business && <Header user={user} business={business} logout={logout} /> }
       
-      <Box mx='auto' w='800px' py={4}>
+      <Box mx='auto' w={{ base: '100%', md: '800px' }} py={4}>
         <Box>
           <Progress value={16.66 * step} colorScheme='green' />
         </Box>
-        <Box mt={6}>
+        <Box mt={6} px={{ base: 4, md: 0 }}>
           { (user && !isLoading) && buildOnboarding() }
         </Box>
       </Box>

@@ -106,7 +106,7 @@ export const BoardingHours: React.FC<BoardingHoursProps> = () => {
         { (({ isSubmitting, values, handleChange, setFieldValue }) => (
           <Form>
             <Flex align='center' w='100%' justify='center' mt={10}>
-              <VStack w='80%' spacing={3}>
+              <VStack w={{ base: '100%', md: '80%' }} spacing={3}>
                 { formDay(values, handleChange, setFieldValue, 'Lunes', 0) }
                 { formDay(values, handleChange, setFieldValue, 'Martes', 1) }
                 { formDay(values, handleChange, setFieldValue, 'Miércoles', 2) }

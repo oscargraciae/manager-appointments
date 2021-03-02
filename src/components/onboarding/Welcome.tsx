@@ -55,7 +55,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ user, business }) => {
         { ({ values, isSubmitting, handleChange, errors }) => (
           <Form>
             <Flex aling='center' justify='center' py={10} w='100%' direction='column' justifyContent='center' align='center'>
-              <Box w='70%'>
+              <Box w={{ base: '100%', md: '70%' }}>
                 <VStack spacing={5} align='flex-start'>
                   <InputField inputSize='lg' name='name' label='¿Cual es el nombre de tu negocio?'/>
                   <FormControl isInvalid={!!errors.businessCategoryId}>

@@ -84,17 +84,17 @@ export const SettingsAdvanced: React.FC<SettingsAdvancedProps> = () => {
         </Box>
         <Flex w='100%' mt={10}>
           <VStack align="flex-start" direction="row" divider={<Divider />} spacing={6}>
-            <Flex w='450px'>
+            <Flex w={{ base: '100%', md: '450px' }}>
               <Text fontWeight='500'>Permitir varias reservaciones a la misma hora</Text>
               <Spacer />
               <Switch size="md" isChecked={hasParallelBookings} onChange={(e) => setHasParallelBookings(!hasParallelBookings)} />
             </Flex>
-            {/* <Flex w='450px'>
+            {/* <Flex w={{ base: '100%', md: '450px' }}>
               <Text fontWeight='500'>Confirmar reservaciones</Text>
               <Spacer />
               <Switch size="md" isChecked={hasBookingConfimation} onChange={(e) => setHasBookingConfimation(!hasBookingConfimation)} />
             </Flex> */}
-            <Flex w='450px'>
+            <Flex w={{ base: '100%', md: '450px' }}>
               <Text fontWeight='500'>Negocio público</Text>
               <Spacer />
               <Switch size="md" isChecked={isPublic} onChange={(e) => setIsPublic(!isPublic)} />

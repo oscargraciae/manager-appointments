@@ -68,16 +68,16 @@ export const Services: React.FC<ServicesProps> = ({ }) => {
       <ModalNewService isOpen={isOpen} onClose={onClose} realodList={realodList} service={service} />
       { service &&  <DeleteServiceDialog isOpen={isDeleteModal} realodList={realodList} service={service} onClose={() => setIsDeleteModal(!isDeleteModal)} /> }
       <ContainerPage title='Servicios'>
-        <Flex direction='row' align='center'>
+        <Flex direction={{ base: 'column', md: 'row' }} align='center'>
           <Box>
-            <Text fontSize='md' fontWeight='500' mb={8} pr={20}>Añade tantos servicios necesites para que tus clientes conozcan todo lo que ofreces.</Text>
+            <Text fontSize='md' fontWeight='500' mb={8} pr={{ base: 3, md: 20 }}>Añade tantos servicios necesites para que tus clientes conozcan todo lo que ofreces.</Text>
           </Box>
           <Spacer />
-          <Box>
+          <Box alignSelf={{ base: 'end', md: 'center' }} mb={3}>
             <Button variant='primary' onClick={handleCreateService}>Nuevo servicio</Button>
           </Box>
         </Flex>
-        <Box>
+        <Box fontSize={{ base: 'xs', md: 'md' }}>
           <ServiceList
             services={services}
             handleEditService={handleEditService}

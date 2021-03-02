@@ -15,7 +15,7 @@ export const ServiceItem: React.FC<ServiceItemProps> = ({ service, handleEditSer
     <Flex shadow='md' bg='surface' px={4} py={4} borderBottomWidth={1} borderBottomColor='borders' align='center'>
       <Box w='50%'>
         <Text size='xs' fontWeight='bold'>{service.name}</Text>
-        <Text fontSize='sm'>{service.description}</Text>
+        <Text fontSize='xs' display={{ base: 'none', md: 'block' }}>{service.description}</Text>
       </Box>
       <Text size='sm' fontWeight='semibold' w='25%' textAlign='left'>{service.time} min.</Text>
       <Text size='sm' fontWeight='semibold' w='25%' textAlign='left'>${service.price}</Text>

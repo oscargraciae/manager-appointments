@@ -78,7 +78,7 @@ export const SettingsHour: React.FC<SettingsHourProps> = () => {
     const { openFrom, openTill } = values.days[dayOfWeek];
     return (
       <HStack w='100%' direction='row' justify='center' align='center'>
-        <Text w='250px' textAlign='left' fontWeight='semibold'>{label}</Text>
+        <Text fontSize={{ base: 'sm', md: 'md' }} w='250px' textAlign='left' fontWeight='semibold'>{label}</Text>
         <FormControl>
           <Select name={`days[${dayOfWeek}].openFrom`} size='lg' value={openFrom} onChange={handleChange}>
             { hours.map((time, key) => (
@@ -133,7 +133,7 @@ export const SettingsHour: React.FC<SettingsHourProps> = () => {
         { (({ isSubmitting, values, handleChange, setFieldValue }) => (
           <Form>
             <Flex w='100%' mt={10}>
-              <VStack w='80%' spacing={3}>
+              <VStack w={{ base: '100%', md: '80%' }} spacing={3}>
                 { formDay(values, handleChange, setFieldValue, 'Domingo', 0) }
                 { formDay(values, handleChange, setFieldValue, 'Lunes', 1) }
                 { formDay(values, handleChange, setFieldValue, 'Martes', 2) }

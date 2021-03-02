@@ -52,7 +52,7 @@ export const BoardingServices: React.FC<BoardingServicesProps> = ({}) => {
         { (({ isSubmitting, values, handleChange, setFieldValue, errors }) => (
           <Form>
             <Flex align='center' w='100%' justify='center' mt={10}>
-              <VStack w='70%' spacing={3}>
+              <VStack w={{ base: '100%', md: '70%' }} spacing={3}>
                 <InputField inputSize='lg' name='name' label='Nombre del servicio' />
                 <InputField inputSize='lg' name='description' label='Descripción' />
                 <HStack w='100%' direction='row' justify='space-between'>

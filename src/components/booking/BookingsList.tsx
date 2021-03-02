@@ -81,22 +81,22 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
   }
 
   return (
-    <Table variant="simple" size="md">
-        <TableCaption>*Cálculos basados en el tiempo y precio de cada servicio</TableCaption>
+    <Table variant="simple" size='md'>
+        {/* <TableCaption>*Cálculos basados en el tiempo y precio de cada servicio</TableCaption> */}
         <Thead>
           <Tr>
-            <Th>#</Th>
+            <Th display={{ base: 'none', md: 'block' }}>#</Th>
             <Th>Cliente</Th>
             <Th>Fecha de servicio</Th>
-            <Th>Tiempo de servicio*</Th>
-            <Th>Total a cobrar*</Th>
-            <Th />
+            <Th display={{ base: 'none', md: 'block' }} >Tiempo de servicio*</Th>
+            <Th display={{ base: 'none', md: 'block' }}>Total a cobrar*</Th>
+            <Th display={{ base: 'none', md: 'block' }} />
           </Tr>
         </Thead>
         <Tbody>
           { bookings.map((item: IBooking, index :number) => (
             <Tr fontSize='14px'>
-              <Td>{item.id}</Td>
+              <Td display={{ base: 'none', md: 'block' }}>{item.id}</Td>
               <Td
                 textDecor='underline'
                 onClick={() => history.push(`/bookings/${item.id}`)}
@@ -106,9 +106,9 @@ export const BookingsList: React.FC<BookingsListProps> = ({}) => {
                 {item.customer?.firstName} {item.customer?.lastName}
               </Td>
               <Td>{item.bookingDate ? formatDate(item.bookingDate) : ''}</Td>
-              <Td>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
-              <Td>${item.totalPrice}MXN</Td>
-              <Td>
+              <Td display={{ base: 'none', md: 'block' }}>{item.totalTime ? minutesToHour(item.totalTime) : ''}</Td>
+              <Td display={{ base: 'none', md: 'block' }}>${item.totalPrice}MXN</Td>
+              <Td display={{ base: 'none', md: 'block' }}>
                 <Flex>
                   <Tooltip label="Aceptar" fontSize="md">
                     <IconButton

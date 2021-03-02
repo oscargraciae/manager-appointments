@@ -17,7 +17,5 @@ export const getMax = (hours :IHour[]) => {
     }
   });
 
-  console.log('Orden get max', hours);
-
   return hours[0].openTill;
 }

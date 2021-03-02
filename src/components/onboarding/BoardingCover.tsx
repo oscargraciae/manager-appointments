@@ -18,7 +18,7 @@ export const BoardingCover: React.FC<BoardingCoverProps> = ({}) => {
     <Box textAlign='center'>
       <Heading as='h2'>Foto de portada</Heading>
       <Text fontSize='xl' fontWeight='500'>Esta es la primera imagen que verán las personas, puede ser el logotipo de tu negocio, imagen de tu local o una imagen de un servicio.</Text>
-      <Flex w='100%' justify='space-between' mt={10}>
+      <Flex flexDirection={{ base: 'column', md: 'row' }} w='100%' justify='space-between' mt={10}>
         <UploadCover onUpload={handleOnUpload} />
       </Flex>
 

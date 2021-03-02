@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // Libraries
 import React, { useEffect, useState, useRef } from 'react'
-import { Box, Button, Flex, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, useDisclosure, useToast } from '@chakra-ui/react';
+import ReactGA from 'react-ga';
 import { useHistory } from 'react-router-dom';
 import copy from 'copy-to-clipboard';
 import { ImQrcode, ImCopy } from 'react-icons/im'
-
 import QRCode from 'qrcode.react';
 
 import { UserService } from '../../services/userService';
 import { User } from '../../types/User';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
+import { DrawerSidebar } from './DrawerSidebar';
 import { Loading } from './Loading';
 import { IBusiness } from '../../types/Business';
 import { SocketProvider } from '../../context/socketContext';
@@ -25,13 +26,19 @@ export const UserContext = React.createContext<any>(null);
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   // hooks
   const toast = useToast();
-
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Drawer Sidebar Menu
   // state
   const [user, setUser] = useState<User | null>(null);
   const [business, setBusiness] = useState<IBusiness | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
+  useEffect(() => {
+    console.log('Cambiando pagina', window.location.pathname);
+    
+    ReactGA.initialize('G-29KJTGHLGJ');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, [history.location]);
 
   const fetchMe = async () => {
     const { success, user } = await new UserService().getMe();
@@ -102,18 +109,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   //   </Flex>
   // }
 
-  
   return (
     <UserContext.Provider value={business}>
       <SocketProvider>
         <Box height='100vh' bg='background'>
-          <Header user={user} business={business} logout={logout} />
+          <Header user={user} business={business} logout={logout} onOpen={onOpen} />
           <Flex direction='row'>
             <Sidebar logout={logout} business={business} />
+            <DrawerSidebar isOpen={isOpen} onClose={onClose} logout={logout} />
             <Box w='100%'>
               <Flex w='100%' bg='surface' px={6} py={2} alignItems='center'>
                 <Text fontSize='sm' fontWeight='bold' mr={2}>Compartir</Text>
-                <Text fontSize='sm' >{`${window.location.origin}/b/${generateName(business.name)}/${business.id}`}</Text>
+                <Text display={{ base: 'none', md: 'block' }} fontSize='sm' >{`${window.location.origin}/b/${generateName(business.name)}/${business.id}`}</Text>
                 <Button size='xs' ml={3} leftIcon={<ImCopy />} onClick={copyUrl}>
                   Copiar URL
                 </Button>
