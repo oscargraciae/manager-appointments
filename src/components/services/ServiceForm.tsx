@@ -23,7 +23,6 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ realodList, service })
       response = await new BusinessService().createService(values, businessContext.id);
     }
     
-    console.log('respuesta', response);
     if (response.success) {
       if (realodList) {
         realodList();

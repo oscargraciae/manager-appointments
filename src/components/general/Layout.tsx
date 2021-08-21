@@ -34,8 +34,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('Cambiando pagina', window.location.pathname);
-    
     ReactGA.initialize('G-29KJTGHLGJ');
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, [history.location]);
